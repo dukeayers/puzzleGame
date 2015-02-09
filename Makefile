@@ -1,22 +1,27 @@
-FLEX_SDK = ~/flexsdk
-ADL = $(FLEX_SDK)/bin/adl
-AMXMLC = $(FLEX_SDK)/bin/amxmlc
-SOURCES = src/Startup.hx src/Root.hx
+FLEX_SDK ?= /Users/mostovarpour/ApacheFlex
 
-all: game.swf
+APP=game
+APP_XML=$(APP).xml
+ADL=$(FLEX_SDK)/bin/adl
+AMXMLC=$(FLEX_SDK)/bin/amxmlc
+SOURCES=src/*.hx
 
-game.swf: $(SOURCES)
+all: $(APP).swf
+
+$(APP).swf: $(SOURCES)
 	haxe \
-	-cp src \
-	-cp vendor \
-	-swf-version 11.8 \
-	-swf-header 640:360:60:ffffff \
-	-main Startup \
-	-swf game.swf \
-	-swf-lib vendor/starling.swc --macro "patchTypes('vendor/starling.patch')"
+		-cp src \
+		-cp vendor \
+		-swf-version 11.8 \
+		-swf-header 960:480:60:ffffff \
+		-main Startup \
+		-swf $(APP).swf \
+		-swf-lib vendor/starling.swc --macro "patchTypes('vendor/starling.patch')"
 
 clean:
-	rm -rf game.swf *~ src/*~
+	rm -rf $(APP).swf
 
-test: game.swf
-	$(ADL) -profile tv -screensize 640x360:640x360 game.xml
+test: $(APP).swf
+	$(ADL) -profile tv -screensize 960x480:960x480 $(APP_XML)
+
+
