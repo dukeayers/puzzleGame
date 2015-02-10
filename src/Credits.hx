@@ -13,10 +13,10 @@ import flash.events.*;
 //import starling.events.KeyboardEvent;
 
 
-class Main extends Sprite{
+class Credits extends Sprite{
 	public static var assets:AssetManager;
 	public var rootSprite:Sprite;
-	public var mainMenu:Image;
+	public var credits:Image;
 	private var textField:TextField; 
 	private var textFormat:TextFormat;
 	public function new(rootSprite:Sprite){
@@ -27,10 +27,10 @@ class Main extends Sprite{
 	public function start(){
     				
 
-		mainMenu = new Image(Root.assets.getTexture("mainMenu"));
-		mainMenu.x = 0;
-		mainMenu.y = 0;
-		rootSprite.addChild(mainMenu);
+		credits = new Image(Root.assets.getTexture("credits"));
+		credits.x = 0;
+		credits.y = 0;
+		rootSprite.addChild(credits);
 
 		//Set Textfield to be used as a terminal
 		textField = new flash.text.TextField();
@@ -52,24 +52,18 @@ class Main extends Sprite{
 
 	}
 
-		public function keyDown(event:KeyboardEvent ){
-			var keyCode = event.keyCode;
-  			if(keyCode == 13){
-  				if(textField.text == "Play" || textField.text == "play"){
-  					removeChildren();
-  					var game = new Game(rootSprite);
-					game.start();
-  				}
-  				else if(textField.text == "Credits" || textField.text == "credits"){
-  					var credits = new Credits(rootSprite);
-  					credits.start();
-  				}
-  				else{
-  					trace("Nope");
-  				}
-  			}
-
+	public function keyDown(event:KeyboardEvent ){
+		var keyCode = event.keyCode;
+		if(keyCode == 13){
+			if(textField.text == "Play" || textField.text == "play"){
+				removeChildren();
+				var game = new Game(rootSprite);
+				game.start();
+			}
+			else{
+				trace("Nope");
+			}
 		}
 
-
+	}
 }
