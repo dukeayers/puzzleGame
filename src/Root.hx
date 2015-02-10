@@ -3,50 +3,47 @@ import starling.utils.AssetManager;
 import starling.display.Image;
 import starling.core.Starling;
 import starling.animation.Transitions;
-
+import flash.text.TextField;
+import flash.text.TextFormat;
+import flash.text.TextFieldType;
+import flash.text.TextFieldAutoSize;
+import flash.text.TextFieldType;
+import flash.text.TextFormatAlign;
 class Root extends Sprite {
 
   public static var assets:AssetManager;
-  public var ninja:Image;
+  public var closeDoor:Image;
+  public var window:Image;
+  public var rootSprite:Sprite;
 
   public function new() {
+  	rootSprite = this;
     super();
   }
 
   public function start(startup:Startup) {
 
     assets = new AssetManager();
-    assets.enqueue("assets/ninja.png");
+    assets.enqueue("assets/close_door.png");
+    assets.enqueue("assets/window.png");
+    assets.enqueue("assets/mainMenu.png");
+    assets.enqueue("assets/background1.png");
+
     assets.loadQueue(function onProgress(ratio:Float) {
+		if (ratio == 1) {
+		// loading completed animation
+		Starling.juggler.tween(startup.loadingBitmap, 2.0, {transition:Transitions.EASE_OUT, delay:0, alpha: 0, onComplete: function(){
+			// cleaning up the loadingScreen after it has already faded	
+			startup.removeChild(startup.loadingBitmap);
+			var main = new Main(rootSprite);
+			main.start();
 
-	if (ratio == 1) {
-
-	  Starling.juggler.tween(startup.loadingBitmap,
-				 2.0,
-				 {
-				 transition: Transitions.EASE_OUT,
-				     delay: 1.0,
-				     alpha: 0,
-				     onComplete: function() {
-				       startup.removeChild(startup.loadingBitmap);
-				       ninja = new Image(Root.assets.getTexture("ninja"));
-				       ninja.x = 100;
-				       ninja.y = 0;
-				       addChild(ninja);
-
-				       Starling.juggler.tween(ninja,
-							      1.0,
-							      {
-							      transition: Transitions.EASE_OUT_BOUNCE,
-								  delay: 2.0,
-								  y: 250
-								  });
-
-				   }
-				 });
-
+			// closeDoor = new Image(Root.assets.getTexture("close_door"));
+			// closeDoor.x = 200;
+			// closeDoor.y = 200;
+			// addChild(closeDoor);
+		}});
 	}
-
       });
 
   }
