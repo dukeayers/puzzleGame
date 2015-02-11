@@ -25,6 +25,7 @@ class Game extends Sprite{
 	public var brokenWindow:Image;
 	public var unopenDoor:Image;
 	public var computer:Image;
+	public var brokenGlass:Image;
 
 	private var textField:TextField; 
 	private var textFormat:TextFormat;
@@ -77,6 +78,10 @@ class Game extends Sprite{
 		computer.x = 600;
 		computer.y = 100;
 		rootSprite.addChild(computer);
+
+		brokenGlass = new Image(Root.assets.getTexture("brokenGlass"));
+		brokenGlass.x = 0;
+		brokenGlass.y = 250;
 
 
 
@@ -138,6 +143,7 @@ class Game extends Sprite{
   				else{
   					trace("You break the window with the chair.");
   					rootSprite.addChild(brokenWindow);
+  					rootSprite.addChild(brokenGlass);
 
   				}
   				  			}
