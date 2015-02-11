@@ -46,6 +46,7 @@ class Game extends Sprite{
 		textField.background = true;
 		textField.backgroundColor = 0x433C3C;
 		textField.width = 700;
+
 		Starling.current.nativeOverlay.addChild(textField);
 
 		textField.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
@@ -54,6 +55,30 @@ class Game extends Sprite{
 
 	public function keyDown(event:KeyboardEvent ){
 		var keyCode = event.keyCode;
+		if (keyCode == 13){
+			// door statements, should be changed to do stuff later
+			if(textField.text == "Door" || textField.text == "door"){
+  				trace("You see a wooden door.");
+  			}
+  			if(textField.text == "Open Door" || textField.text == "open door"){
+  				trace("You try to open the door, but it is locked.");
+  			}
+  			if(textField.text == "Kick Door" || textField.text == "kick door"){
+  				trace("You kick the door, but it won't budge.");
+  			}
+  			if(textField.text == "Knock on door" || textField.text == "knock on door"){
+  				trace("You knock on the door, but no one answers.");
+  			}
+  			if(textField.text == "Push Door" || textField.text == "push door"){
+  				trace("You push the door, but it doesn't budge.");
+  			}
+  			if(textField.text == "Pull Door" || textField.text == "pull door"){
+  				trace("You pull on the door, but it doesn't budge.");
+  			}
+  			// clear console text
+  			textField.text = "";
+
+		}
 
 	}
 }

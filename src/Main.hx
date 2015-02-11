@@ -48,24 +48,27 @@ class Main extends Sprite{
 		textField.width = 700;
 		Starling.current.nativeOverlay.addChild(textField);
 
-		textField.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
+		textField.addEventListener(KeyboardEvent.KEY_DOWN, menuKeyDown);
 
 	}
 
-		public function keyDown(event:KeyboardEvent ){
+		public function menuKeyDown(event:KeyboardEvent ){
 			var keyCode = event.keyCode;
   			if(keyCode == 13){
   				if(textField.text == "Play" || textField.text == "play"){
   					removeChildren();
   					var game = new Game(rootSprite);
 					game.start();
+					textField.text = "";
   				}
   				else if(textField.text == "Credits" || textField.text == "credits"){
   					var credits = new Credits(rootSprite);
   					credits.start();
+  					textField.text = "";
   				}
   				else{
   					trace("Nope");
+  					textField.text = "";
   				}
   			}
 
