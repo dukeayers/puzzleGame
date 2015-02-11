@@ -24,6 +24,7 @@ class Game extends Sprite{
 	public var window:Image;
 	public var brokenWindow:Image;
 	public var unopenDoor:Image;
+	public var computer:Image;
 
 	private var textField:TextField; 
 	private var textFormat:TextFormat;
@@ -61,6 +62,13 @@ class Game extends Sprite{
 		brokenWindow = new Image(Root.assets.getTexture("brokenWindow"));
 		brokenWindow.x = 100;
 		brokenWindow.y = 200;
+
+		computer = new Image(Root.assets.getTexture("computer"));
+		computer.x = 600;
+		computer.y = 100;
+		rootSprite.addChild(computer);
+
+
 
 		//Set Textfield to be used as a terminal
 		textField = new flash.text.TextField();
@@ -135,6 +143,17 @@ class Game extends Sprite{
   				trace("You pick the chair up in your arms.");
   				holdingChair = true;
   			}
+  			if(textField.text == "Put down chair" || textField.text == "put down chair"){
+  				if(holdingChair == true){
+  					trace("You set the chair down.");
+  					holdingChair = false;
+  				}
+  				else{
+  					trace("You are not holding the chair.");
+  				}
+  				holdingChair = true;
+  			}
+
 
 
   			// clear console text
