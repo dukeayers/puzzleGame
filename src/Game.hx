@@ -43,6 +43,16 @@ class Game extends Sprite{
 		quadBack.x = 0;
 		quadBack.y = 0;
 		rootSprite.addChild(quadBack);
+		
+		quadBack = new Quad(960, 180, 0x50826e, true);
+		quadBack.x = 0;
+		quadBack.y = 380;
+		rootSprite.addChild(quadBack);
+		
+		quadBack = new Quad(960, 100, 0xfdffef, true);
+		quadBack.x = 0;
+		quadBack.y = 0;
+		rootSprite.addChild(quadBack);
 
 		window = new Image(Root.assets.getTexture("window"));
 		window.x = 100;
@@ -51,7 +61,7 @@ class Game extends Sprite{
 
 		unopenDoor = new Image(Root.assets.getTexture("close_door"));
 		unopenDoor.x = 500;
-		unopenDoor.y = 200;
+		unopenDoor.y = 230;
 		rootSprite.addChild(unopenDoor);
 
 		chair = new Image(Root.assets.getTexture("chair2"));
@@ -84,7 +94,7 @@ class Game extends Sprite{
 		textField.y = 473;
 		//Set the background and width
 		textField.background = true;
-		textField.backgroundColor = 0x433C3C;
+		textField.backgroundColor = 0x50826e;
 		textField.width = 700;
 
 		Starling.current.nativeOverlay.addChild(textField);
