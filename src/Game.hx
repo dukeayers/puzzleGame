@@ -12,6 +12,11 @@ import flash.text.TextFieldType;
 import flash.text.TextFormatAlign;
 import flash.events.*;
 
+//These imports are for setting the textField focus
+//import flash.text.Stage;
+//import starling.display.*;
+//import starling.stage.*;
+
 //import starling.events.KeyboardEvent;
 
 
@@ -27,6 +32,8 @@ class Game extends Sprite{
 	public var unopenDoor:Image;
 	public var computer:Image;
 	public var brokenGlass:Image;
+    public var avatar:Image;
+    public var table:Image;
 
 	private var textField:TextField; 
 	private var textFormat:TextFormat;
@@ -79,15 +86,28 @@ class Game extends Sprite{
 		brokenWindow.x = 100;
 		brokenWindow.y = 200;
 
+        table = new Image(Root.assets.getTexture("table"));
+        table.x = 650;
+        table.y = 310;
+        rootSprite.addChild(table);
+
 		computer = new Image(Root.assets.getTexture("computer"));
-		computer.x = 600;
-		computer.y = 100;
+		computer.x = 680;
+		computer.y = 225;
+        computer.scaleX *= 0.5;
+        computer.scaleY *= 0.5;
 		rootSprite.addChild(computer);
+
+        
 
 		brokenGlass = new Image(Root.assets.getTexture("brokenGlass"));
 		brokenGlass.x = 0;
 		brokenGlass.y = 250;
 
+        avatar = new Image(Root.assets.getTexture("avatarNormal"));
+        avatar.x = 350;
+        avatar.y = 210;
+        rootSprite.addChild(avatar);
 
 
 		//Set Textfield to be used as a terminal
@@ -190,6 +210,10 @@ class Game extends Sprite{
 
   			// clear console text
   			textField.text = "";
+
+            // TODO Set focus to textField
+            //stage.focus = textField;
+            //textField.setSelection(textField.text.length, textField.text.length);
 
   			trace("Inventory: "+ playerInventory);
 
