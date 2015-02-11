@@ -113,6 +113,7 @@ class Game extends Sprite{
   				trace("You try to open the window, but it doesn't budge.");
   			}
   			if(textField.text == "Break window" || textField.text == "break window"){
+  				// check to see if player is holding chair to break window with
   				if(holdingChair == false){
   					trace("You have nothing to break the window with.");
   				}
