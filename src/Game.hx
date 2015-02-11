@@ -65,21 +65,42 @@ class Game extends Sprite{
 			if(textField.text == "Door" || textField.text == "door"){
   				trace("You see a wooden door.");
   			}
-  			if(textField.text == "Open Door" || textField.text == "open door"){
+  			if(textField.text == "Open door" || textField.text == "open door"){
   				trace("You try to open the door, but it is locked.");
   			}
-  			if(textField.text == "Kick Door" || textField.text == "kick door"){
+  			if(textField.text == "Kick door" || textField.text == "kick door"){
   				trace("You kick the door, but it won't budge.");
   			}
   			if(textField.text == "Knock on door" || textField.text == "knock on door"){
   				trace("You knock on the door, but no one answers.");
   			}
-  			if(textField.text == "Push Door" || textField.text == "push door"){
+  			if(textField.text == "Push door" || textField.text == "push door"){
   				trace("You push the door, but it doesn't budge.");
   			}
-  			if(textField.text == "Pull Door" || textField.text == "pull door"){
+  			if(textField.text == "Pull door" || textField.text == "pull door"){
   				trace("You pull on the door, but it doesn't budge.");
   			}
+
+  			// window statements, need to add interacitivity later
+  			if(textField.text == "Open window" || textField.text == "open window"){
+  				trace("You try to open the window, but it doesn't budge.");
+  			}
+  			if(textField.text == "Break window" || textField.text == "break window"){
+  				trace("You have nothing to break the window with.");
+  			}
+  			if(textField.text == "Crawl out window" || textField.text == "crawl out window"){
+  				trace("The window is shut, you cannot crawl out.");
+  			}
+
+  			// chair statements, needs interactivity
+  			if(textField.text == "Sit on chair" || textField.text == "sit on chair"){
+  				trace("You sit down on the chair.");
+  			}
+  			if(textField.text == "Pick up chair" || textField.text == "pick up chair"){
+  				trace("You pick the chair up in your arms.");
+  			}
+
+
   			// clear console text
   			textField.text = "";
 
