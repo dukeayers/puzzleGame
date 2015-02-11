@@ -11,6 +11,7 @@ import flash.text.TextFieldAutoSize;
 import flash.text.TextFieldType;
 import flash.text.TextFormatAlign;
 import flash.events.*;
+
 //import starling.events.KeyboardEvent;
 
 
@@ -32,6 +33,10 @@ class Game extends Sprite{
 	private var quadBack:Quad;
 
 	public var holdingChair:Bool = false;
+
+	public var playerInventory = new List<String>();
+
+	
 
 	public function new(rootSprite:Sprite){
 		this.rootSprite = rootSprite;
@@ -106,6 +111,8 @@ class Game extends Sprite{
 
 		textField.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 
+		
+
 	}
 
 	public function keyDown(event:KeyboardEvent ){
@@ -156,24 +163,35 @@ class Game extends Sprite{
   				trace("You sit down on the chair.");
   			}
   			if(textField.text == "Pick up chair" || textField.text == "pick up chair"){
-  				trace("You pick the chair up in your arms.");
-  				holdingChair = true;
+  				// check to see if player is already holding the chair
+  				if(holdingChair == true){
+  					trace("You are already holding the chair.");
+  				}
+  				else{
+  					trace("You pick the chair up in your arms.");
+  					playerInventory.add("chair");
+  					rootSprite.removeChild(chair);
+  					holdingChair = true;
+  				}
   			}
   			if(textField.text == "Put down chair" || textField.text == "put down chair"){
   				if(holdingChair == true){
   					trace("You set the chair down.");
+  					rootSprite.addChild(chair);
+  					playerInventory.remove("chair");
   					holdingChair = false;
   				}
   				else{
   					trace("You are not holding the chair.");
   				}
-  				holdingChair = true;
   			}
 
 
 
   			// clear console text
   			textField.text = "";
+
+  			trace("Inventory: "+ playerInventory);
 
 		}
 
