@@ -3,6 +3,7 @@ import starling.utils.AssetManager;
 import starling.display.Image;
 import starling.core.Starling;
 import starling.animation.Transitions;
+import starling.display.Quad;
 import flash.text.TextField;
 import flash.text.TextFormat;
 import flash.text.TextFieldType;
@@ -14,12 +15,19 @@ import flash.events.*;
 
 
 class Game extends Sprite{
+
 	public static var assets:AssetManager;
 	public var rootSprite:Sprite;
+
 	public var background:Image;
 	public var chair:Image;
+	public var window:Image;
+	public var unopenDoor:Image;
+
 	private var textField:TextField; 
 	private var textFormat:TextFormat;
+	private var quadBack:Quad;
+
 	public function new(rootSprite:Sprite){
 		this.rootSprite = rootSprite;
 		super();
@@ -27,11 +35,21 @@ class Game extends Sprite{
 
 	public function start(){
     				
+		quadBack = new Quad(960, 480, 0x433C3C, true);
+		quadBack.x = 0;
+		quadBack.y = 0;
+		rootSprite.addChild(quadBack);
 
-		background = new Image(Root.assets.getTexture("background1"));
-		background.x = 0;
-		background.y = 0;
-		rootSprite.addChild(background);
+		window = new Image(Root.assets.getTexture("window"));
+		window.x = 100;
+		window.y = 200;
+		rootSprite.addChild(window);
+
+		unopenDoor = new Image(Root.assets.getTexture("close_door"));
+		unopenDoor.x = 500;
+		unopenDoor.y = 200;
+		rootSprite.addChild(unopenDoor);
+
 		chair = new Image(Root.assets.getTexture("chair2"));
 		chair.x = 100;
 		chair.y = 300;
@@ -42,11 +60,13 @@ class Game extends Sprite{
 		textFormat = new TextFormat("Arial", 18, 0xffffff);
 		textFormat.align = TextFormatAlign.LEFT;
 		textField.defaultTextFormat = textFormat;
+
+		
 		//Accept the ability for input
 		textField.type = TextFieldType.INPUT;
 		textField.height = 25;
 		textField.x = 36;
-		textField.y = 478;
+		textField.y = 473;
 		//Set the background and width
 		textField.background = true;
 		textField.backgroundColor = 0x433C3C;
