@@ -26,6 +26,7 @@ class Root extends Sprite {
     assets = new AssetManager();
     assets.enqueue("assets/close_door.png");
     assets.enqueue("assets/window.png");
+    assets.enqueue("assets/brokenWindow.png");
     assets.enqueue("assets/mainMenu.png");
     assets.enqueue("assets/background1.png");
     assets.enqueue("assets/credits.png");

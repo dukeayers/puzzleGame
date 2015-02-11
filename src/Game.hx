@@ -22,11 +22,14 @@ class Game extends Sprite{
 	public var background:Image;
 	public var chair:Image;
 	public var window:Image;
+	public var brokenWindow:Image;
 	public var unopenDoor:Image;
 
 	private var textField:TextField; 
 	private var textFormat:TextFormat;
 	private var quadBack:Quad;
+
+	public var holdingChair:Bool = false;
 
 	public function new(rootSprite:Sprite){
 		this.rootSprite = rootSprite;
@@ -51,9 +54,13 @@ class Game extends Sprite{
 		rootSprite.addChild(unopenDoor);
 
 		chair = new Image(Root.assets.getTexture("chair2"));
-		chair.x = 100;
+		chair.x = 200;
 		chair.y = 300;
 		rootSprite.addChild(chair);
+
+		brokenWindow = new Image(Root.assets.getTexture("brokenWindow"));
+		brokenWindow.x = 100;
+		brokenWindow.y = 200;
 
 		//Set Textfield to be used as a terminal
 		textField = new flash.text.TextField();
@@ -106,8 +113,15 @@ class Game extends Sprite{
   				trace("You try to open the window, but it doesn't budge.");
   			}
   			if(textField.text == "Break window" || textField.text == "break window"){
-  				trace("You have nothing to break the window with.");
-  			}
+  				if(holdingChair == false){
+  					trace("You have nothing to break the window with.");
+  				}
+  				else{
+  					trace("You break the window with the chair.");
+  					rootSprite.addChild(brokenWindow);
+
+  				}
+  				  			}
   			if(textField.text == "Crawl out window" || textField.text == "crawl out window"){
   				trace("The window is shut, you cannot crawl out.");
   			}
@@ -118,6 +132,7 @@ class Game extends Sprite{
   			}
   			if(textField.text == "Pick up chair" || textField.text == "pick up chair"){
   				trace("You pick the chair up in your arms.");
+  				holdingChair = true;
   			}
 
 
