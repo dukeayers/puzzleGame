@@ -41,7 +41,7 @@ class Main extends Sprite{
 		textField.type = TextFieldType.INPUT;
 		textField.height = 25;
 		textField.x = 36;
-		textField.y = 478;
+		textField.y = 473;
 		//Set the background and width
 		textField.background = true;
 		textField.backgroundColor = 0x433C3C;
