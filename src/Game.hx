@@ -17,6 +17,7 @@ class Game extends Sprite{
 	public static var assets:AssetManager;
 	public var rootSprite:Sprite;
 	public var background:Image;
+	public var chair:Image;
 	private var textField:TextField; 
 	private var textFormat:TextFormat;
 	public function new(rootSprite:Sprite){
@@ -31,6 +32,10 @@ class Game extends Sprite{
 		background.x = 0;
 		background.y = 0;
 		rootSprite.addChild(background);
+		chair = new Image(Root.assets.getTexture("chair2"));
+		chair.x = 100;
+		chair.y = 300;
+		rootSprite.addChild(chair);
 
 		//Set Textfield to be used as a terminal
 		textField = new flash.text.TextField();
