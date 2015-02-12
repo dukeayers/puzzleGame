@@ -9,12 +9,16 @@ import flash.text.TextFieldType;
 import flash.text.TextFieldAutoSize;
 import flash.text.TextFieldType;
 import flash.text.TextFormatAlign;
+import flash.media.SoundChannel;
+
 class Root extends Sprite {
 
   public static var assets:AssetManager;
   public var closeDoor:Image;
   public var window:Image;
   public var rootSprite:Sprite;
+  public var bgmusic:SoundChannel;
+
 
   public function new() {
   	rootSprite = this;
@@ -39,6 +43,7 @@ class Root extends Sprite {
     assets.enqueue("assets/bed.png");
     assets.enqueue("assets/cutBed.png");
     assets.enqueue("assets/spring.png");
+    assets.enqueue("assets/bgmusic.mp3");
 
     assets.loadQueue(function onProgress(ratio:Float) {
 		if (ratio == 1) {
@@ -47,6 +52,7 @@ class Root extends Sprite {
 			// cleaning up the loadingScreen after it has already faded	
 			startup.removeChild(startup.loadingBitmap);
 			var main = new Main(rootSprite);
+      assets.playSound("bgmusic");
 			main.start();
 
 			// closeDoor = new Image(Root.assets.getTexture("close_door"));
