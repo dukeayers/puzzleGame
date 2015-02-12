@@ -162,45 +162,52 @@ public var playerInventory = new List<String>();
 		if(textField.text == "Door" || textField.text == "door"){
   			trace("You see a wooden door.");
   		}
-  		if(textField.text == "Open door" || textField.text == "open door"){
-  			trace("You try to open the door, but it is locked.");
+  		if(textField.text == "Open door" || textField.text == "open door" || textField.text == "open the door"){
+  			trace("You try to open the door, but it seems to be locked.");
   		}
-  		if(textField.text == "Kick door" || textField.text == "kick door"){
+  		if(textField.text == "Kick door" || textField.text == "kick door" || textField.text == "kick in door" || textField.text == "kick down door" 
+  			|| textField.text == "kick the door"){
   			trace("You kick the door, but it won't budge.");
 		}
- 		if(textField.text == "Knock on door" || textField.text == "knock on door"){
+ 		if(textField.text == "Knock on door" || textField.text == "knock on door" || textField.text == "knock on the door"){
   			trace("You knock on the door, but no one answers.");
   		}
-  		if(textField.text == "Push door" || textField.text == "push door"){
+  		if(textField.text == "Push door" || textField.text == "push door" || textField.text == "push on the door" || textField.text == "push the door"){
   			trace("You push the door, but it doesn't budge.");
   		}
-  		if(textField.text == "Pull door" || textField.text == "pull door"){
+  		if(textField.text == "Pull door" || textField.text == "pull door" || textField.text == "pull on the door" || textField.text == "pull the door"){
   			trace("You pull on the door, but it doesn't budge.");
   		}
 
 
   		// window statements, need to add interacitivity later
-  		if(textField.text == "Open window" || textField.text == "open window"){
+  		if(textField.text == "Window" || textField.text == "window"){
+  			trace("You see a window.");
+  		}
+  		if(textField.text == "Open window" || textField.text == "open window" || textField.text == "open the window"){
   			trace("You try to open the window, but it doesn't budge.");
   		}
-  		if(textField.text == "Break window" || textField.text == "break window"){
+  		if(textField.text == "Break window" || textField.text == "break window" || textField.text == "punch window"|| textField.text == "hit window with chair"|| 
+  			textField.text == "smash window" || textField.text == "break the window"){
   		// check to see if player is holding chair to break window with
   		if(holdingChair == false){
   			trace("You have nothing to break the window with.");
   		}
   		else{
   			trace("You break the window with the chair.");
+  			rootSprite.removeChild(window);
   			rootSprite.addChild(brokenWindow);
   			rootSprite.addChild(brokenGlass);
   		}
   	}
-  		if(textField.text == "Crawl out window" || textField.text == "crawl out window"){
+  		if(textField.text == "Crawl out window" || textField.text == "crawl out window" || textField.text == "go out window" || textField.text == "escape through window"){
   			trace("The window is shut, you cannot crawl out.");
   			}
 
 
   		//glass statements
-  		if(textField.text == "Pick up glass" || textField.text == "pick up glass"){
+  		if(textField.text == "Pick up glass" || textField.text == "pick up glass" || textField.text == "get glass" || textField.text == "pickup broken glass"
+  		 || textField.text == "pick up broken glass"){
   			if(holdingGlass == true){
   				trace("You already picked the glass up.");
   			}
@@ -211,7 +218,8 @@ public var playerInventory = new List<String>();
   				holdingGlass = true;
   			}
   		}
-  			if(textField.text == "Put down glass" || textField.text == "put down glass"){
+  			if(textField.text == "Put down glass" || textField.text == "put down glass" || textField.text == "drop glass" || textField.text == "drop broken glass" 
+  				|| textField.text == "get rid of glass"){
   				if(holdingGlass == true){
   					trace("You put the broken glass back down on the floor.");
   					playerInventory.remove("Broken Glass");
@@ -222,7 +230,8 @@ public var playerInventory = new List<String>();
   					trace("You did not pick up the glass.");
   				}
   			}	
-        	if(textField.text == "Cut bed" || textField.text == "cut bed" || textField.text == "cut bed with glass"){
+        	if(textField.text == "Cut bed" || textField.text == "cut bed" || textField.text == "cut bed with glass" || textField.text == "cut open bed" 
+        		|| textField.text == "cut mattress open" || textField.text == "cut mattress"){
         		if(holdingGlass == true){
             		trace("You cut open the bed with the broken glass.");
             		rootSprite.removeChild(bed);
@@ -231,10 +240,10 @@ public var playerInventory = new List<String>();
           }
         }
   			// chair statements, needs interactivity
-  			if(textField.text == "Sit on chair" || textField.text == "sit on chair"){
+  			if(textField.text == "Sit on chair" || textField.text == "sit on chair" || textField.text == "sit"){
   				trace("You sit down on the chair.");
   			}
-  			if(textField.text == "Pick up chair" || textField.text == "pick up chair"){
+  			if(textField.text == "Pick up chair" || textField.text == "pick up chair" || textField.text == "grab chair" || textField.text == "pick up the chair"){
   				// check to see if player is already holding the chair
   				if(holdingChair == true){
   					trace("You are already holding the chair.");
@@ -246,7 +255,8 @@ public var playerInventory = new List<String>();
   					holdingChair = true;
   				}
   			}
-  			if(textField.text == "Put down chair" || textField.text == "put down chair"){
+  			if(textField.text == "Put down chair" || textField.text == "put down chair" || textField.text == "set down chair" || textField.text == "drop chair" 
+  				|| textField.text == "get rid of chair"){
   				if(holdingChair == true){
   					trace("You set the chair down.");
   					rootSprite.addChild(chair);
@@ -257,7 +267,7 @@ public var playerInventory = new List<String>();
   					trace("You are not holding the chair.");
   				}
   			}
-  			
+
   			// clear console text
   			textField.text = "";
 
