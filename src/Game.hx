@@ -36,6 +36,7 @@ class Game extends Sprite{
   public var table:Image;
   public var bed:Image;
   public var cutBed:Image;
+  public var spring:Image;
 
 	private var textField:TextField; 
 	private var textFormat:TextFormat;
@@ -117,7 +118,12 @@ class Game extends Sprite{
     cutBed.scaleY +=1;
     cutBed.x = 0;
     cutBed.y = 150;
-    
+
+    spring = new Image(Root.assets.getTexture("spring"));
+    spring.x = 300;
+    spring.y = 375;
+
+
 
     avatar = new Image(Root.assets.getTexture("avatarNormal"));
     avatar.x = 575;
@@ -226,6 +232,8 @@ class Game extends Sprite{
             trace("You cut open the bed with the broken glass.");
             rootSprite.removeChild(bed);
             rootSprite.addChild(cutBed);
+            rootSprite.addChild(spring);
+
           }
         }
 
