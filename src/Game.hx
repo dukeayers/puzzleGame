@@ -54,6 +54,7 @@ public var holdingGlass:Bool = false;
 public var holdingSpring:Bool = false;
 public var doorLocked:Bool = true;
 public var userSitting:Bool = false;
+public var userSleeping:Bool = false;
 
 public var playerInventory = new List<String>();
 
@@ -412,7 +413,9 @@ public var playerInventory = new List<String>();
   				}
   			}
 
-
+			
+			
+			
   			if(textField.text == "Pick up chair" || textField.text == "pick up chair" || textField.text == "grab chair" || textField.text == "pick up the chair"){
   				// check to see if player is already holding the chair
   				if(userSitting == true){
