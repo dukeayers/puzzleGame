@@ -37,6 +37,9 @@ public var avatarSitting:Image;
 public var table:Image;
 public var bed:Image;
 public var cutBed:Image;
+public var miniGlass:Image;
+public var miniChair:Image;
+public var miniSpring:Image;
 public var bed2:Image;
 public var spring:Image;
 public var winScreen:Image;
@@ -96,6 +99,18 @@ public var playerInventory = new List<String>();
 		brokenWindow = new Image(Root.assets.getTexture("brokenWindow"));
 		brokenWindow.x = 100;
 		brokenWindow.y = 200;
+		
+		miniChair = new Image(Root.assets.getTexture("miniChair"));
+                miniChair.x = 480;
+                miniChair.y = 58;
+
+                miniGlass = new Image(Root.assets.getTexture("miniGlass"));
+                miniGlass.x = 530;
+                miniGlass.y = 58;
+
+                miniSpring = new Image(Root.assets.getTexture("miniSpring"));
+                miniSpring.x = 580;
+                miniSpring.y = 58;
 
    	table = new Image(Root.assets.getTexture("table"));
   	table.x = 800;
@@ -322,6 +337,7 @@ public var playerInventory = new List<String>();
   				else{
   					trace("You pick up the broken glass.");
   					playerInventory.add("Broken Glass");
+					rootSprite.addChild(miniGlass);
   					rootSprite.removeChild(brokenGlass);
   					holdingGlass = true;
   				}
@@ -336,6 +352,7 @@ public var playerInventory = new List<String>();
   					if(holdingGlass == true){
   						trace("You put the broken glass back down on the floor.");
   						playerInventory.remove("Broken Glass");
+						rootSprite.removeChild(miniGlass);
   						holdingGlass = false;
   						rootSprite.addChild(brokenGlass);
   					}
@@ -408,6 +425,7 @@ public var playerInventory = new List<String>();
   					else{
   						trace("You pick up the chair.");
   						playerInventory.add("Chair");
+						rootSprite.addChild(miniChair);
   						rootSprite.removeChild(chair);
   						holdingChair = true;
   					}	
@@ -420,6 +438,7 @@ public var playerInventory = new List<String>();
   					trace("You set the chair down.");
   					rootSprite.addChild(chair);
   					playerInventory.remove("Chair");
+					rootSprite.removeChild(miniChair);
   					holdingChair = false;
   				}
   				else{
@@ -436,6 +455,7 @@ public var playerInventory = new List<String>();
   				else{
   					trace("you pickup a spring");
   					playerInventory.add("Spring");
+					rootSprite.addChild(miniSpring);
   					rootSprite.removeChild(spring);
   					holdingSpring = true;
   				}
