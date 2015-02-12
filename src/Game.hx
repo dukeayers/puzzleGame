@@ -32,10 +32,13 @@ class Game extends Sprite{
 	public var unopenDoor:Image;
 	public var computer:Image;
 	public var brokenGlass:Image;
-  public var avatar:Image;
-  public var table:Image;
-  public var bed:Image;
-  public var cutBed:Image;
+        public var avatar:Image;
+        public var table:Image;
+        public var bed:Image;
+        public var cutBed:Image;
+        public var miniGlass:Image;
+        public var miniChair:Image;
+        public var miniSpring:Image;
 
 	private var textField:TextField; 
 	private var textFormat:TextFormat;
@@ -89,16 +92,28 @@ class Game extends Sprite{
 		brokenWindow.x = 100;
 		brokenWindow.y = 200;
 
-    table = new Image(Root.assets.getTexture("table"));
-    table.x = 800;
-    table.y = 350;
-    rootSprite.addChild(table);
+		miniChair = new Image(Root.assets.getTexture("miniChair"));
+                miniChair.x = 480;
+                miniChair.y = 58;
+
+                miniGlass = new Image(Root.assets.getTexture("miniGlass"));
+                miniGlass.x = 530;
+                miniGlass.y = 58;
+
+                miniSpring = new Image(Root.assets.getTexture("miniSpring"));
+                miniSpring.x = 580;
+                miniSpring.y = 58;
+
+		table = new Image(Root.assets.getTexture("table"));
+		table.x = 800;
+		table.y = 350;
+		rootSprite.addChild(table);
 
 		computer = new Image(Root.assets.getTexture("computer"));
 		computer.x = 820;
 		computer.y = 265;
-    computer.scaleX *= 0.5;
-    computer.scaleY *= 0.5;
+		computer.scaleX *= 0.5;
+		computer.scaleY *= 0.5;
 		rootSprite.addChild(computer);
 
 		brokenGlass = new Image(Root.assets.getTexture("brokenGlass"));
@@ -207,6 +222,7 @@ class Game extends Sprite{
   					trace("You pick up the broken glass.");
   					playerInventory.add("Broken Glass");
   					rootSprite.removeChild(brokenGlass);
+					rootSprite.addChild(miniGlass);
   					holdingGlass = true;
   				}
   			}
@@ -215,6 +231,7 @@ class Game extends Sprite{
   					trace("You put the broken glass back down on the floor.");
   					playerInventory.remove("Broken Glass");
   					holdingGlass = false;
+					rootSprite.removeChild(miniGlass);
   					rootSprite.addChild(brokenGlass);
   				}
   				else{
@@ -243,6 +260,7 @@ class Game extends Sprite{
   				else{
   					trace("You pick up the chair.");
   					playerInventory.add("Chair");
+					rootSprite.addChild(miniChair);
   					rootSprite.removeChild(chair);
   					holdingChair = true;
   				}
@@ -252,6 +270,7 @@ class Game extends Sprite{
   					trace("You set the chair down.");
   					rootSprite.addChild(chair);
   					playerInventory.remove("chair");
+					rootSprite.removeChild(miniGlass);
   					holdingChair = false;
   				}
   				else{
