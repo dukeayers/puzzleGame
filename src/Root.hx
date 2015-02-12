@@ -36,6 +36,7 @@ class Root extends Sprite {
     assets.enqueue("assets/avatarNormal.png");
     assets.enqueue("assets/avatarDead.png");
     assets.enqueue("assets/table.png");
+    assets.enqueue("assets/bed.png");
 
     assets.loadQueue(function onProgress(ratio:Float) {
 		if (ratio == 1) {

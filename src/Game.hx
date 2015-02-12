@@ -34,6 +34,7 @@ class Game extends Sprite{
 	public var brokenGlass:Image;
     public var avatar:Image;
     public var table:Image;
+    public var bed:Image;
 
 	private var textField:TextField; 
 	private var textFormat:TextFormat;
@@ -99,16 +100,23 @@ class Game extends Sprite{
         computer.scaleY *= 0.5;
 		rootSprite.addChild(computer);
 
-        
-
 		brokenGlass = new Image(Root.assets.getTexture("brokenGlass"));
-		brokenGlass.x = 0;
+		brokenGlass.x = -100;
 		brokenGlass.y = 250;
 
+        bed = new Image(Root.assets.getTexture("bed"));
+        bed.scaleX += 1;
+        bed.scaleY += 1;
+        bed.x = 0;
+        bed.y = 150;
+        rootSprite.addChild(bed);
+
         avatar = new Image(Root.assets.getTexture("avatarNormal"));
-        avatar.x = 350;
-        avatar.y = 210;
+        avatar.x = 575;
+        avatar.y = 220;
         rootSprite.addChild(avatar);
+
+
 
 
 		//Set Textfield to be used as a terminal
@@ -139,6 +147,8 @@ class Game extends Sprite{
 	public function keyDown(event:KeyboardEvent ){
 		var keyCode = event.keyCode;
 		if (keyCode == 13){
+
+
 			// door statements, should be changed to do stuff later
 			if(textField.text == "Door" || textField.text == "door"){
   				trace("You see a wooden door.");
@@ -159,6 +169,7 @@ class Game extends Sprite{
   				trace("You pull on the door, but it doesn't budge.");
   			}
 
+
   			// window statements, need to add interacitivity later
   			if(textField.text == "Open window" || textField.text == "open window"){
   				trace("You try to open the window, but it doesn't budge.");
@@ -172,9 +183,8 @@ class Game extends Sprite{
   					trace("You break the window with the chair.");
   					rootSprite.addChild(brokenWindow);
   					rootSprite.addChild(brokenGlass);
-
   				}
-  				  			}
+  			}
   			if(textField.text == "Crawl out window" || textField.text == "crawl out window"){
   				trace("The window is shut, you cannot crawl out.");
   			}
