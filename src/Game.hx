@@ -44,6 +44,8 @@ private var quadBack:Quad;
 
 public var holdingChair:Bool = false;
 public var holdingGlass:Bool = false;
+public var holdingSpring:Bool = false;
+public var doorLocked:Bool = true;
 
 public var playerInventory = new List<String>();
 
@@ -163,7 +165,14 @@ public var playerInventory = new List<String>();
   			trace("You see a wooden door.");
   		}
   		if(textField.text == "Open door" || textField.text == "open door" || textField.text == "open the door"){
-  			trace("You try to open the door, but it seems to be locked.");
+  			if(doorLocked == true){
+  				trace("You try to open the door, but it seems to be locked.");
+  			}
+  			else{
+  				trace("The door opens, YOU WIN!!!");
+  				// win the game, win screen here
+  			}
+  			
   		}
   		if(textField.text == "Kick door" || textField.text == "kick door" || textField.text == "kick in door" || textField.text == "kick down door" 
   			|| textField.text == "kick the door"){
@@ -173,11 +182,41 @@ public var playerInventory = new List<String>();
   			trace("You knock on the door, but no one answers.");
   		}
   		if(textField.text == "Push door" || textField.text == "push door" || textField.text == "push on the door" || textField.text == "push the door"){
-  			trace("You push the door, but it doesn't budge.");
+  		  	if(doorLocked == true){
+  				trace("You try to push the door, but it seems to be locked.");
+  			}
+  			else{
+  				trace("The door opens, YOU WIN!!!");
+  				// win the game, win screen here
+  			}
+  			
   		}
   		if(textField.text == "Pull door" || textField.text == "pull door" || textField.text == "pull on the door" || textField.text == "pull the door"){
-  			trace("You pull on the door, but it doesn't budge.");
+  		  	if(doorLocked == true){
+  				trace("You try to pull the door, but it seems to be locked.");
+  			}
+  			else{
+  				trace("The door opens, YOU WIN!!!");
+  				// win the game, win screen here
+  			}
+  			
   		}
+  		if(textField.text == "Pick door" || textField.text == "pick door" || textField.text == "unlock door" || textField.text == "pick door lock" || textField.text == "pick lock"){
+  			if(doorLocked == true){
+  				if(holdingSpring == true){
+  				trace("You pick the door lock with the spring. The door unlocks.");
+  				doorLocked = false;
+
+  			}
+  			else{
+  				trace("You have nothing to pick the door's lock with.");
+  			}
+  		}
+  			else{
+  				trace("the door is already unlocked");
+  			}
+  			
+  	}
 
 
   		// window statements, need to add interacitivity later
@@ -260,12 +299,26 @@ public var playerInventory = new List<String>();
   				if(holdingChair == true){
   					trace("You set the chair down.");
   					rootSprite.addChild(chair);
-  					playerInventory.remove("chair");
+  					playerInventory.remove("Chair");
   					holdingChair = false;
   				}
   				else{
   					trace("You are not holding the chair.");
   				}
+  			}
+
+  			// bed statements
+  			if(textField.text == "pick up spring" || textField.text == "get spring" || textField.text == "grab spring"){
+  				if(holdingSpring == true){
+  					trace("you already are holding spring");
+  				}
+  				else{
+  					trace("you pickup a spring");
+  					playerInventory.add("Spring");
+  					rootSprite.removeChild(spring);
+  					holdingSpring = true;
+  				}
+  				trace("You sit down on the chair.");
   			}
 
   			// clear console text
