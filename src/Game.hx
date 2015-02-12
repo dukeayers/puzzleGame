@@ -33,6 +33,7 @@ public var unopenDoor:Image;
 public var computer:Image;
 public var brokenGlass:Image;
 public var avatar:Image;
+public var avatarSitting:Image;
 public var table:Image;
 public var bed:Image;
 public var cutBed:Image;
@@ -46,6 +47,7 @@ public var holdingChair:Bool = false;
 public var holdingGlass:Bool = false;
 public var holdingSpring:Bool = false;
 public var doorLocked:Bool = true;
+public var userSitting:Bool = false;
 
 public var playerInventory = new List<String>();
 
@@ -125,6 +127,10 @@ public var playerInventory = new List<String>();
     	spring.x = 300;
     	spring.y = 375;
 
+    	avatarSitting = new Image(Root.assets.getTexture("avatarSitting"));
+    	avatarSitting.x = 675;
+    	avatarSitting.y = 175;
+
 
     	avatar = new Image(Root.assets.getTexture("avatarNormal"));
     	avatar.x = 575;
@@ -160,17 +166,23 @@ public var playerInventory = new List<String>();
 		if (keyCode == 13){
 
 
+
 		// door statements, should be changed to do stuff later
 		if(textField.text == "Door" || textField.text == "door"){
   			trace("You see a wooden door.");
   		}
   		if(textField.text == "Open door" || textField.text == "open door" || textField.text == "open the door"){
-  			if(doorLocked == true){
-  				trace("You try to open the door, but it seems to be locked.");
+  			if(userSitting == true){
+  				trace("you cant do taht because you are sitting");
   			}
   			else{
-  				trace("The door opens, YOU WIN!!!");
-  				// win the game, win screen here
+  				if(doorLocked == true){
+  					trace("You try to open the door, but it seems to be locked.");
+  			}
+  				else{
+  					trace("The door opens, YOU WIN!!!");
+  					// win the game, win screen here
+  				}	
   			}
   			
   		}
@@ -182,41 +194,55 @@ public var playerInventory = new List<String>();
   			trace("You knock on the door, but no one answers.");
   		}
   		if(textField.text == "Push door" || textField.text == "push door" || textField.text == "push on the door" || textField.text == "push the door"){
-  		  	if(doorLocked == true){
-  				trace("You try to push the door, but it seems to be locked.");
+  			if(userSitting == true){
+  				trace("You cannot do that because you are sitting.");
   			}
   			else{
-  				trace("The door opens, YOU WIN!!!");
-  				// win the game, win screen here
+  				if(doorLocked == true){
+  					trace("You try to push the door, but it seems to be locked.");
+  				}
+  				else{
+  					trace("The door opens, YOU WIN!!!");
+  					// win the game, win screen here
+  				}
   			}
-  			
   		}
-  		if(textField.text == "Pull door" || textField.text == "pull door" || textField.text == "pull on the door" || textField.text == "pull the door"){
-  		  	if(doorLocked == true){
-  				trace("You try to pull the door, but it seems to be locked.");
-  			}
-  			else{
-  				trace("The door opens, YOU WIN!!!");
-  				// win the game, win screen here
-  			}
-  			
-  		}
-  		if(textField.text == "Pick door" || textField.text == "pick door" || textField.text == "unlock door" || textField.text == "pick door lock" || textField.text == "pick lock"){
-  			if(doorLocked == true){
-  				if(holdingSpring == true){
-  				trace("You pick the door lock with the spring. The door unlocks.");
-  				doorLocked = false;
 
+
+  		if(textField.text == "Pull door" || textField.text == "pull door" || textField.text == "pull on the door" || textField.text == "pull the door"){
+  			if(userSitting == true){
+  				trace("You cant do that because you are sitting still.");
   			}
   			else{
-  				trace("You have nothing to pick the door's lock with.");
+  				if(doorLocked == true){
+  					trace("You try to pull the door, but it seems to be locked.");
+  			}
+  				else{
+  					trace("The door opens, YOU WIN!!!");
+  					// win the game, win screen here
+  				}
   			}
   		}
-  			else{
-  				trace("the door is already unlocked");
+  		if(textField.text == "Pick door" || textField.text == "pick door" || textField.text == "unlock door" 
+  			|| textField.text == "pick door lock" || textField.text == "pick lock"){
+  			if(userSitting == true){
+  				trace("You cannot do that, you are still sitting.");
   			}
-  			
-  	}
+  			else{
+  				if(doorLocked == true){
+  					if(holdingSpring == true){
+  						trace("You pick the door lock with the spring. The door unlocks.");
+  						doorLocked = false;
+  					}
+  					else{
+  						trace("You have nothing to pick the door's lock with.");
+  					}
+  				}
+  				else{
+  					trace("the door is already unlocked");
+  				}	
+  			}
+  		}
 
 
   		// window statements, need to add interacitivity later
@@ -224,21 +250,35 @@ public var playerInventory = new List<String>();
   			trace("You see a window.");
   		}
   		if(textField.text == "Open window" || textField.text == "open window" || textField.text == "open the window"){
-  			trace("You try to open the window, but it doesn't budge.");
+  			if(userSitting == true){
+  				trace("you cant, you are sitting still");
+  			}
+  			else{
+  				trace("you try to open the window, but it doensn't budge.");
+  			}
   		}
+  		
   		if(textField.text == "Break window" || textField.text == "break window" || textField.text == "punch window"|| textField.text == "hit window with chair"|| 
   			textField.text == "smash window" || textField.text == "break the window"){
-  		// check to see if player is holding chair to break window with
-  		if(holdingChair == false){
-  			trace("You have nothing to break the window with.");
+
+
+  			if(userSitting == true){
+  				trace("you cant do that you are sitting.");
+
+  			}
+  			else{
+  				if(holdingChair == false){
+  					trace("You have nothing to break the window with.");
+  				}
+  				else{
+  					trace("You break the window with the chair.");
+  					rootSprite.removeChild(window);
+  					rootSprite.addChild(brokenWindow);
+  					rootSprite.addChild(brokenGlass);
+  				}
+  			}
   		}
-  		else{
-  			trace("You break the window with the chair.");
-  			rootSprite.removeChild(window);
-  			rootSprite.addChild(brokenWindow);
-  			rootSprite.addChild(brokenGlass);
-  		}
-  	}
+
   		if(textField.text == "Crawl out window" || textField.text == "crawl out window" || textField.text == "go out window" || textField.text == "escape through window"){
   			trace("The window is shut, you cannot crawl out.");
   			}
@@ -247,53 +287,96 @@ public var playerInventory = new List<String>();
   		//glass statements
   		if(textField.text == "Pick up glass" || textField.text == "pick up glass" || textField.text == "get glass" || textField.text == "pickup broken glass"
   		 || textField.text == "pick up broken glass"){
-  			if(holdingGlass == true){
-  				trace("You already picked the glass up.");
+  		 	if(userSitting == true){
+  		 		trace("you cant, you are still sitting");
+  		 	}
+  		 	else{
+  		 		if(holdingGlass == true){
+  					trace("You already picked the glass up.");
   			}
-  			else{
-  				trace("You pick up the broken glass.");
-  				playerInventory.add("Broken Glass");
-  				rootSprite.removeChild(brokenGlass);
-  				holdingGlass = true;
-  			}
+  				else{
+  					trace("You pick up the broken glass.");
+  					playerInventory.add("Broken Glass");
+  					rootSprite.removeChild(brokenGlass);
+  					holdingGlass = true;
+  				}
+  		 	}
   		}
   			if(textField.text == "Put down glass" || textField.text == "put down glass" || textField.text == "drop glass" || textField.text == "drop broken glass" 
   				|| textField.text == "get rid of glass"){
-  				if(holdingGlass == true){
-  					trace("You put the broken glass back down on the floor.");
-  					playerInventory.remove("Broken Glass");
-  					holdingGlass = false;
-  					rootSprite.addChild(brokenGlass);
+  				if(userSitting == true){
+  					trace("you cant, you are still sitting");
   				}
   				else{
-  					trace("You did not pick up the glass.");
+  					if(holdingGlass == true){
+  						trace("You put the broken glass back down on the floor.");
+  						playerInventory.remove("Broken Glass");
+  						holdingGlass = false;
+  						rootSprite.addChild(brokenGlass);
+  					}
+  					else{
+  						trace("You did not pick up the glass.");
+  					}
   				}
   			}	
+
         	if(textField.text == "Cut bed" || textField.text == "cut bed" || textField.text == "cut bed with glass" || textField.text == "cut open bed" 
         		|| textField.text == "cut mattress open" || textField.text == "cut mattress"){
-        		if(holdingGlass == true){
-            		trace("You cut open the bed with the broken glass.");
-            		rootSprite.removeChild(bed);
-            		rootSprite.addChild(cutBed);
-            		rootSprite.addChild(spring);
-          }
-        }
+        		if(userSitting == true){
+        			trace("cant, still sitting");
+        		}
+        		else{
+        			if(holdingGlass == true){
+            			trace("You cut open the bed with the broken glass.");
+            			rootSprite.removeChild(bed);
+            			rootSprite.addChild(cutBed);
+            			rootSprite.addChild(spring);
+          			}
+          			else{
+          				trace("you have nothing to cut the bed with");
+          			}
+        		}
+        	}
+
+
   			// chair statements, needs interactivity
   			if(textField.text == "Sit on chair" || textField.text == "sit on chair" || textField.text == "sit"){
-  				trace("You sit down on the chair.");
-  			}
-  			if(textField.text == "Pick up chair" || textField.text == "pick up chair" || textField.text == "grab chair" || textField.text == "pick up the chair"){
-  				// check to see if player is already holding the chair
-  				if(holdingChair == true){
-  					trace("You are already holding the chair.");
+  				if(userSitting == true){
+  					trace("you are already sitting in the chair");
   				}
   				else{
-  					trace("You pick up the chair.");
-  					playerInventory.add("Chair");
-  					rootSprite.removeChild(chair);
-  					holdingChair = true;
+  					if(holdingChair == true){
+  						trace("there is no chair to sit down on.");
+  					}
+  					else{
+  						trace("you sit down on the chair");
+  						userSitting = true;
+  						rootSprite.removeChild(avatar);
+  						rootSprite.removeChild(chair);
+  						rootSprite.addChild(avatarSitting);
+  					}
   				}
   			}
+
+
+  			if(textField.text == "Pick up chair" || textField.text == "pick up chair" || textField.text == "grab chair" || textField.text == "pick up the chair"){
+  				// check to see if player is already holding the chair
+  				if(userSitting == true){
+  					trace("you are sitting in the chair");
+  				}
+  				else{
+  					if(holdingChair == true){
+  						trace("You are already holding the chair.");
+  					}
+  					else{
+  						trace("You pick up the chair.");
+  						playerInventory.add("Chair");
+  						rootSprite.removeChild(chair);
+  						holdingChair = true;
+  					}	
+  				}	
+  			}
+
   			if(textField.text == "Put down chair" || textField.text == "put down chair" || textField.text == "set down chair" || textField.text == "drop chair" 
   				|| textField.text == "get rid of chair"){
   				if(holdingChair == true){
@@ -306,6 +389,7 @@ public var playerInventory = new List<String>();
   					trace("You are not holding the chair.");
   				}
   			}
+
 
   			// bed statements
   			if(textField.text == "pick up spring" || textField.text == "get spring" || textField.text == "grab spring"){
@@ -321,6 +405,17 @@ public var playerInventory = new List<String>();
   				trace("You sit down on the chair.");
   			}
 
+  			//computer statements
+  			if(textField.text =="use computer"){
+  				if(userSitting == true){
+  					trace("You turn on the computer...");
+  					// go to computer terminal screen here
+  				}
+  				else{
+  					trace("you cant use the computer while standing");
+  				}
+  			}
+
   			// clear console text
   			textField.text = "";
 
@@ -328,7 +423,7 @@ public var playerInventory = new List<String>();
             //stage.focus = textField;
             //textField.setSelection(textField.text.length, textField.text.length);
 
-  			trace("Inventory: "+ playerInventory);
+  			trace("Inventory: " + playerInventory);
 		}
 	}
 }
