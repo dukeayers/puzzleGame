@@ -37,8 +37,10 @@ public var avatarSitting:Image;
 public var table:Image;
 public var bed:Image;
 public var cutBed:Image;
+public var bed2:Image;
 public var spring:Image;
 public var winScreen:Image;
+
 
 private var textField:TextField; 
 private var textFormat:TextFormat;
@@ -95,37 +97,34 @@ public var playerInventory = new List<String>();
 		brokenWindow.x = 100;
 		brokenWindow.y = 200;
 
-    	table = new Image(Root.assets.getTexture("table"));
-    	table.x = 800;
-    	table.y = 350;
-    	rootSprite.addChild(table);
+   	table = new Image(Root.assets.getTexture("table"));
+  	table.x = 800;
+  	table.y = 350;
+  	rootSprite.addChild(table);
 
 		computer = new Image(Root.assets.getTexture("computer"));
 		computer.x = 820;
 		computer.y = 265;
-    	computer.scaleX *= 0.5;
-    	computer.scaleY *= 0.5;
+  	computer.scaleX *= 0.5;
+  	computer.scaleY *= 0.5;
 		rootSprite.addChild(computer);
 
 		brokenGlass = new Image(Root.assets.getTexture("brokenGlass"));
 		brokenGlass.x = -100;
 		brokenGlass.y = 250;
 
-    	bed = new Image(Root.assets.getTexture("bed"));
-    	bed.scaleX += 1;
-    	bed.scaleY += 1;
-    	bed.x = 0;
-    	bed.y = 150;
-    	rootSprite.addChild(bed);
 
     	cutBed = new Image(Root.assets.getTexture("cutBed"));
-    	cutBed.scaleX +=1;
-    	cutBed.scaleY +=1;
-    	cutBed.x = 0;
-    	cutBed.y = 150;
+    	cutBed.x = 150;
+    	cutBed.y = 145;
+
+      bed2 = new Image(Root.assets.getTexture("bed"));
+      bed2.x = 150;
+      bed2.y = 145;
+      rootSprite.addChild(bed2);
 
     	spring = new Image(Root.assets.getTexture("spring"));
-    	spring.x = 300;
+    	spring.x = 335;
     	spring.y = 375;
 
     	avatarSitting = new Image(Root.assets.getTexture("avatarSitting"));
@@ -138,9 +137,9 @@ public var playerInventory = new List<String>();
     	avatar.y = 220;
     	rootSprite.addChild(avatar);
 
-        winScreen = new Image(Root.assets.getTexture("winScreen"));
-        winScreen.x = 0;
-        winScreen.y = 0;
+      winScreen = new Image(Root.assets.getTexture("winScreen"));
+      winScreen.x = 0;
+      winScreen.y = 0;
 
 
 		//Set Textfield to be used as a terminal
