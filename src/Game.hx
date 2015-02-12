@@ -257,7 +257,7 @@ public var playerInventory = new List<String>();
   				trace("you try to open the window, but it doensn't budge.");
   			}
   		}
-  		
+
   		if(textField.text == "Break window" || textField.text == "break window" || textField.text == "punch window"|| textField.text == "hit window with chair"|| 
   			textField.text == "smash window" || textField.text == "break the window"){
 
@@ -355,6 +355,18 @@ public var playerInventory = new List<String>();
   						rootSprite.removeChild(chair);
   						rootSprite.addChild(avatarSitting);
   					}
+  				}
+  			}
+  			if(textField.text == "Stand up" || textField.text == "stand up" || textField.text == "stand"|| textField.text == "get up" ){
+  				if(userSitting == true){
+  					userSitting = false;
+  					trace("you stand up");
+  					rootSprite.removeChild(avatarSitting);
+  					rootSprite.addChild(avatar);
+  					rootSprite.addChild(chair);
+  				}
+  				else{
+  					trace("you are already standing");
   				}
   			}
 
