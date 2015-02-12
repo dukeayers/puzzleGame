@@ -40,6 +40,7 @@ class Game extends Sprite{
 	private var quadBack:Quad;
 
 	public var holdingChair:Bool = false;
+	public var holdingGlass:Bool = false;
 
 	public var playerInventory = new List<String>();
 
@@ -178,6 +179,34 @@ class Game extends Sprite{
   				trace("The window is shut, you cannot crawl out.");
   			}
 
+
+  			//glass statements
+  			if(textField.text == "Pick up glass" || textField.text == "pick up glass"){
+  				if(holdingGlass == true){
+  					trace("You already picked the glass up.");
+  				}
+  				else{
+  					trace("You pick up the broken glass.");
+  					playerInventory.add("Broken Glass");
+  					rootSprite.removeChild(brokenGlass);
+  					holdingGlass = true;
+  				}
+  			}
+  			if(textField.text == "Put down glass" || textField.text == "put down glass"){
+  				if(holdingGlass == true){
+  					trace("You put the broken glass back down on the floor.");
+  					playerInventory.remove("Broken Glass");
+  					holdingGlass = false;
+  					rootSprite.addChild(brokenGlass);
+  				}
+  				else{
+  					trace("You did not pick up the glass.");
+  				}
+  			}	
+
+
+
+
   			// chair statements, needs interactivity
   			if(textField.text == "Sit on chair" || textField.text == "sit on chair"){
   				trace("You sit down on the chair.");
@@ -188,8 +217,8 @@ class Game extends Sprite{
   					trace("You are already holding the chair.");
   				}
   				else{
-  					trace("You pick the chair up in your arms.");
-  					playerInventory.add("chair");
+  					trace("You pick up the chair.");
+  					playerInventory.add("Chair");
   					rootSprite.removeChild(chair);
   					holdingChair = true;
   				}
