@@ -78,7 +78,7 @@ class Game extends Sprite{
 		rootSprite.addChild(unopenDoor);
 
 		chair = new Image(Root.assets.getTexture("chair2"));
-		chair.x = 200;
+		chair.x = 700;
 		chair.y = 300;
 		rootSprite.addChild(chair);
 
@@ -87,13 +87,13 @@ class Game extends Sprite{
 		brokenWindow.y = 200;
 
         table = new Image(Root.assets.getTexture("table"));
-        table.x = 650;
-        table.y = 310;
+        table.x = 800;
+        table.y = 350;
         rootSprite.addChild(table);
 
 		computer = new Image(Root.assets.getTexture("computer"));
-		computer.x = 680;
-		computer.y = 225;
+		computer.x = 820;
+		computer.y = 265;
         computer.scaleX *= 0.5;
         computer.scaleY *= 0.5;
 		rootSprite.addChild(computer);
