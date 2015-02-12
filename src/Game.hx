@@ -38,6 +38,7 @@ public var table:Image;
 public var bed:Image;
 public var cutBed:Image;
 public var spring:Image;
+public var winScreen:Image;
 
 private var textField:TextField; 
 private var textFormat:TextFormat;
@@ -137,6 +138,10 @@ public var playerInventory = new List<String>();
     	avatar.y = 220;
     	rootSprite.addChild(avatar);
 
+        winScreen = new Image(Root.assets.getTexture("winScreen"));
+        winScreen.x = 0;
+        winScreen.y = 0;
+
 
 		//Set Textfield to be used as a terminal
 		textField = new flash.text.TextField();
@@ -173,7 +178,7 @@ public var playerInventory = new List<String>();
   		}
   		if(textField.text == "Open door" || textField.text == "open door" || textField.text == "open the door"){
   			if(userSitting == true){
-  				trace("you cant do taht because you are sitting");
+  				trace("you cant do that because you are sitting");
   			}
   			else{
   				if(doorLocked == true){
@@ -182,6 +187,13 @@ public var playerInventory = new List<String>();
   				else{
   					trace("The door opens, YOU WIN!!!");
   					// win the game, win screen here
+                    rootSprite.addChild(winScreen);
+                    if (textField.text == "Play" || textField.text == "play")
+                    {
+                            removeChildren();
+                            removeEventListeners();
+                            start();
+                    }
   				}	
   			}
   			
@@ -204,6 +216,13 @@ public var playerInventory = new List<String>();
   				else{
   					trace("The door opens, YOU WIN!!!");
   					// win the game, win screen here
+                    rootSprite.addChild(winScreen);
+                    if (textField.text == "Play" || textField.text == "play")
+                    {
+                            removeChildren();
+                            removeEventListeners();
+                            start();
+                    }
   				}
   			}
   		}
@@ -220,6 +239,13 @@ public var playerInventory = new List<String>();
   				else{
   					trace("The door opens, YOU WIN!!!");
   					// win the game, win screen here
+                    rootSprite.addChild(winScreen);
+                    if (textField.text == "Play" || textField.text == "play")
+                    {
+                            removeChildren();
+                            removeEventListeners();
+                            start();
+                    }
   				}
   			}
   		}
