@@ -22,6 +22,9 @@ import flash.events.*;
 
 class Game extends Sprite{
 
+//This function is to set the focus on the textField, it does not work.
+//public static setFocus(newFocus: Object) : Boolean
+
 public static var assets:AssetManager;
 public var rootSprite:Sprite;
 
@@ -44,6 +47,8 @@ public var winScreen:Image;
 
 private var textField:TextField; 
 private var textFormat:TextFormat;
+private var textOut:TextField;
+private var textOutFormat:TextFormat;
 private var quadBack:Quad;
 
 public var holdingChair:Bool = false;
@@ -62,7 +67,7 @@ public var playerInventory = new List<String>();
 	}
 
 	public function start(){
-    				
+    	
 		quadBack = new Quad(960, 480, 0x433C3C, true);
 		quadBack.x = 0;
 		quadBack.y = 0;
@@ -161,6 +166,21 @@ public var playerInventory = new List<String>();
 
 		Starling.current.nativeOverlay.addChild(textField);
 
+        //Trying to set the focus... again.
+        //Starling.setFocus("textField");
+
+        //This is for outputting text
+        textOut = new flash.text.TextField();
+        textOutFormat = new TextFormat("Arial", 18, 0xffffff);
+        textOutFormat.align = TextFormatAlign.LEFT;
+        textOut.defaultTextFormat = textOutFormat;
+        textOut.background = true;
+        textOut.backgroundColor = 0x50826e;
+        textOut.width = 700;
+        textOut.x = 0;
+        textOut.y = 520;
+        Starling.current.nativeOverlay.addChild(textField);
+
 		textField.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 
 	}
@@ -177,7 +197,9 @@ public var playerInventory = new List<String>();
   		}
   		if(textField.text == "Open door" || textField.text == "open door" || textField.text == "open the door"){
   			if(userSitting == true){
-  				trace("you cant do that because you are sitting");
+  				//trace("you cant do that because you are sitting");
+                textOut.text = "You can't do that because you are sitting";
+                trace(textOut.text);
   			}
   			else{
   				if(doorLocked == true){
