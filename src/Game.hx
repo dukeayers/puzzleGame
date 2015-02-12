@@ -22,30 +22,30 @@ import flash.events.*;
 
 class Game extends Sprite{
 
-	public static var assets:AssetManager;
-	public var rootSprite:Sprite;
+public static var assets:AssetManager;
+public var rootSprite:Sprite;
 
-	public var background:Image;
-	public var chair:Image;
-	public var window:Image;
-	public var brokenWindow:Image;
-	public var unopenDoor:Image;
-	public var computer:Image;
-	public var brokenGlass:Image;
-  public var avatar:Image;
-  public var table:Image;
-  public var bed:Image;
-  public var cutBed:Image;
-  public var spring:Image;
+public var background:Image;
+public var chair:Image;
+public var window:Image;
+public var brokenWindow:Image;
+public var unopenDoor:Image;
+public var computer:Image;
+public var brokenGlass:Image;
+public var avatar:Image;
+public var table:Image;
+public var bed:Image;
+public var cutBed:Image;
+public var spring:Image;
 
-	private var textField:TextField; 
-	private var textFormat:TextFormat;
-	private var quadBack:Quad;
+private var textField:TextField; 
+private var textFormat:TextFormat;
+private var quadBack:Quad;
 
-	public var holdingChair:Bool = false;
-	public var holdingGlass:Bool = false;
+public var holdingChair:Bool = false;
+public var holdingGlass:Bool = false;
 
-	public var playerInventory = new List<String>();
+public var playerInventory = new List<String>();
 
 	
 
@@ -90,47 +90,44 @@ class Game extends Sprite{
 		brokenWindow.x = 100;
 		brokenWindow.y = 200;
 
-    table = new Image(Root.assets.getTexture("table"));
-    table.x = 800;
-    table.y = 350;
-    rootSprite.addChild(table);
+    	table = new Image(Root.assets.getTexture("table"));
+    	table.x = 800;
+    	table.y = 350;
+    	rootSprite.addChild(table);
 
 		computer = new Image(Root.assets.getTexture("computer"));
 		computer.x = 820;
 		computer.y = 265;
-    computer.scaleX *= 0.5;
-    computer.scaleY *= 0.5;
+    	computer.scaleX *= 0.5;
+    	computer.scaleY *= 0.5;
 		rootSprite.addChild(computer);
 
 		brokenGlass = new Image(Root.assets.getTexture("brokenGlass"));
 		brokenGlass.x = -100;
 		brokenGlass.y = 250;
 
-    bed = new Image(Root.assets.getTexture("bed"));
-    bed.scaleX += 1;
-    bed.scaleY += 1;
-    bed.x = 0;
-    bed.y = 150;
-    rootSprite.addChild(bed);
+    	bed = new Image(Root.assets.getTexture("bed"));
+    	bed.scaleX += 1;
+    	bed.scaleY += 1;
+    	bed.x = 0;
+    	bed.y = 150;
+    	rootSprite.addChild(bed);
 
-    cutBed = new Image(Root.assets.getTexture("cutBed"));
-    cutBed.scaleX +=1;
-    cutBed.scaleY +=1;
-    cutBed.x = 0;
-    cutBed.y = 150;
+    	cutBed = new Image(Root.assets.getTexture("cutBed"));
+    	cutBed.scaleX +=1;
+    	cutBed.scaleY +=1;
+    	cutBed.x = 0;
+    	cutBed.y = 150;
 
-    spring = new Image(Root.assets.getTexture("spring"));
-    spring.x = 300;
-    spring.y = 375;
-
-
-
-    avatar = new Image(Root.assets.getTexture("avatarNormal"));
-    avatar.x = 575;
-    avatar.y = 220;
-    rootSprite.addChild(avatar);
+    	spring = new Image(Root.assets.getTexture("spring"));
+    	spring.x = 300;
+    	spring.y = 375;
 
 
+    	avatar = new Image(Root.assets.getTexture("avatarNormal"));
+    	avatar.x = 575;
+    	avatar.y = 220;
+    	rootSprite.addChild(avatar);
 
 
 		//Set Textfield to be used as a terminal
@@ -154,8 +151,6 @@ class Game extends Sprite{
 
 		textField.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 
-		
-
 	}
 
 	public function keyDown(event:KeyboardEvent ){
@@ -163,59 +158,59 @@ class Game extends Sprite{
 		if (keyCode == 13){
 
 
-			// door statements, should be changed to do stuff later
-			if(textField.text == "Door" || textField.text == "door"){
-  				trace("You see a wooden door.");
-  			}
-  			if(textField.text == "Open door" || textField.text == "open door"){
-  				trace("You try to open the door, but it is locked.");
-  			}
-  			if(textField.text == "Kick door" || textField.text == "kick door"){
-  				trace("You kick the door, but it won't budge.");
-  			}
-  			if(textField.text == "Knock on door" || textField.text == "knock on door"){
-  				trace("You knock on the door, but no one answers.");
-  			}
-  			if(textField.text == "Push door" || textField.text == "push door"){
-  				trace("You push the door, but it doesn't budge.");
-  			}
-  			if(textField.text == "Pull door" || textField.text == "pull door"){
-  				trace("You pull on the door, but it doesn't budge.");
+		// door statements, should be changed to do stuff later
+		if(textField.text == "Door" || textField.text == "door"){
+  			trace("You see a wooden door.");
+  		}
+  		if(textField.text == "Open door" || textField.text == "open door"){
+  			trace("You try to open the door, but it is locked.");
+  		}
+  		if(textField.text == "Kick door" || textField.text == "kick door"){
+  			trace("You kick the door, but it won't budge.");
+		}
+ 		if(textField.text == "Knock on door" || textField.text == "knock on door"){
+  			trace("You knock on the door, but no one answers.");
+  		}
+  		if(textField.text == "Push door" || textField.text == "push door"){
+  			trace("You push the door, but it doesn't budge.");
+  		}
+  		if(textField.text == "Pull door" || textField.text == "pull door"){
+  			trace("You pull on the door, but it doesn't budge.");
+  		}
+
+
+  		// window statements, need to add interacitivity later
+  		if(textField.text == "Open window" || textField.text == "open window"){
+  			trace("You try to open the window, but it doesn't budge.");
+  		}
+  		if(textField.text == "Break window" || textField.text == "break window"){
+  		// check to see if player is holding chair to break window with
+  		if(holdingChair == false){
+  			trace("You have nothing to break the window with.");
+  		}
+  		else{
+  			trace("You break the window with the chair.");
+  			rootSprite.addChild(brokenWindow);
+  			rootSprite.addChild(brokenGlass);
+  		}
+  	}
+  		if(textField.text == "Crawl out window" || textField.text == "crawl out window"){
+  			trace("The window is shut, you cannot crawl out.");
   			}
 
 
-  			// window statements, need to add interacitivity later
-  			if(textField.text == "Open window" || textField.text == "open window"){
-  				trace("You try to open the window, but it doesn't budge.");
+  		//glass statements
+  		if(textField.text == "Pick up glass" || textField.text == "pick up glass"){
+  			if(holdingGlass == true){
+  				trace("You already picked the glass up.");
   			}
-  			if(textField.text == "Break window" || textField.text == "break window"){
-  				// check to see if player is holding chair to break window with
-  				if(holdingChair == false){
-  					trace("You have nothing to break the window with.");
-  				}
-  				else{
-  					trace("You break the window with the chair.");
-  					rootSprite.addChild(brokenWindow);
-  					rootSprite.addChild(brokenGlass);
-  				}
+  			else{
+  				trace("You pick up the broken glass.");
+  				playerInventory.add("Broken Glass");
+  				rootSprite.removeChild(brokenGlass);
+  				holdingGlass = true;
   			}
-  			if(textField.text == "Crawl out window" || textField.text == "crawl out window"){
-  				trace("The window is shut, you cannot crawl out.");
-  			}
-
-
-  			//glass statements
-  			if(textField.text == "Pick up glass" || textField.text == "pick up glass"){
-  				if(holdingGlass == true){
-  					trace("You already picked the glass up.");
-  				}
-  				else{
-  					trace("You pick up the broken glass.");
-  					playerInventory.add("Broken Glass");
-  					rootSprite.removeChild(brokenGlass);
-  					holdingGlass = true;
-  				}
-  			}
+  		}
   			if(textField.text == "Put down glass" || textField.text == "put down glass"){
   				if(holdingGlass == true){
   					trace("You put the broken glass back down on the floor.");
@@ -227,18 +222,14 @@ class Game extends Sprite{
   					trace("You did not pick up the glass.");
   				}
   			}	
-        if(textField.text == "Cut bed" || textField.text == "cut bed" || textField.text == "cut bed with glass"){
-          if(holdingGlass == true){
-            trace("You cut open the bed with the broken glass.");
-            rootSprite.removeChild(bed);
-            rootSprite.addChild(cutBed);
-            rootSprite.addChild(spring);
-
+        	if(textField.text == "Cut bed" || textField.text == "cut bed" || textField.text == "cut bed with glass"){
+        		if(holdingGlass == true){
+            		trace("You cut open the bed with the broken glass.");
+            		rootSprite.removeChild(bed);
+            		rootSprite.addChild(cutBed);
+            		rootSprite.addChild(spring);
           }
         }
-
-
-
   			// chair statements, needs interactivity
   			if(textField.text == "Sit on chair" || textField.text == "sit on chair"){
   				trace("You sit down on the chair.");
@@ -266,9 +257,7 @@ class Game extends Sprite{
   					trace("You are not holding the chair.");
   				}
   			}
-
-
-
+  			
   			// clear console text
   			textField.text = "";
 
@@ -277,8 +266,6 @@ class Game extends Sprite{
             //textField.setSelection(textField.text.length, textField.text.length);
 
   			trace("Inventory: "+ playerInventory);
-
 		}
-
 	}
 }
