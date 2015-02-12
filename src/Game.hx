@@ -32,9 +32,10 @@ class Game extends Sprite{
 	public var unopenDoor:Image;
 	public var computer:Image;
 	public var brokenGlass:Image;
-    public var avatar:Image;
-    public var table:Image;
-    public var bed:Image;
+  public var avatar:Image;
+  public var table:Image;
+  public var bed:Image;
+  public var cutBed:Image;
 
 	private var textField:TextField; 
 	private var textFormat:TextFormat;
@@ -88,33 +89,40 @@ class Game extends Sprite{
 		brokenWindow.x = 100;
 		brokenWindow.y = 200;
 
-        table = new Image(Root.assets.getTexture("table"));
-        table.x = 800;
-        table.y = 350;
-        rootSprite.addChild(table);
+    table = new Image(Root.assets.getTexture("table"));
+    table.x = 800;
+    table.y = 350;
+    rootSprite.addChild(table);
 
 		computer = new Image(Root.assets.getTexture("computer"));
 		computer.x = 820;
 		computer.y = 265;
-        computer.scaleX *= 0.5;
-        computer.scaleY *= 0.5;
+    computer.scaleX *= 0.5;
+    computer.scaleY *= 0.5;
 		rootSprite.addChild(computer);
 
 		brokenGlass = new Image(Root.assets.getTexture("brokenGlass"));
 		brokenGlass.x = -100;
 		brokenGlass.y = 250;
 
-        bed = new Image(Root.assets.getTexture("bed"));
-        bed.scaleX += 1;
-        bed.scaleY += 1;
-        bed.x = 0;
-        bed.y = 150;
-        rootSprite.addChild(bed);
+    bed = new Image(Root.assets.getTexture("bed"));
+    bed.scaleX += 1;
+    bed.scaleY += 1;
+    bed.x = 0;
+    bed.y = 150;
+    rootSprite.addChild(bed);
 
-        avatar = new Image(Root.assets.getTexture("avatarNormal"));
-        avatar.x = 575;
-        avatar.y = 220;
-        rootSprite.addChild(avatar);
+    cutBed = new Image(Root.assets.getTexture("cutBed"));
+    cutBed.scaleX +=1;
+    cutBed.scaleY +=1;
+    cutBed.x = 0;
+    cutBed.y = 150;
+    
+
+    avatar = new Image(Root.assets.getTexture("avatarNormal"));
+    avatar.x = 575;
+    avatar.y = 220;
+    rootSprite.addChild(avatar);
 
 
 
@@ -213,7 +221,13 @@ class Game extends Sprite{
   					trace("You did not pick up the glass.");
   				}
   			}	
-
+        if(textField.text == "Cut bed" || textField.text == "cut bed" || textField.text == "cut bed with glass"){
+          if(holdingGlass == true){
+            trace("You cut open the bed with the broken glass.");
+            rootSprite.removeChild(bed);
+            rootSprite.addChild(cutBed);
+          }
+        }
 
 
 
