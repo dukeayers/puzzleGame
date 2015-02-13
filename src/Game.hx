@@ -69,6 +69,7 @@ public var holdingSpring:Bool = false;
 public var holdingShovel:Bool = false;
 public var doorLocked:Bool = true;
 public var userSitting:Bool = false;
+public var bedIsCut:Bool = true;
 public var userSleeping:Bool = false;
 public var userStandingOnChair:Bool = false;
 public var existsAttic:Bool = false;
@@ -450,7 +451,10 @@ public var playerInventory = new List<String>();
         		}
         	}
 		
-			//attic statements
+		
+		
+		// attic statements
+			
 			if(textField.text == "open attic" || textField.text == "Open attic" || textField.text == "open the attic" || textField.text == "Open the attic" || textField.text == "look in attic" || textField.text == "Look in attic"){
 				if(existsAttic == true){
 					if(userStandingOnChair == true){
@@ -468,6 +472,18 @@ public var playerInventory = new List<String>();
 						trace("you can't seem to reach the attic");
 					}
 				}
+			}
+			
+			if(textField.text == "dig a hole" || textField.text == "Dig a hole" || textField.text == "dig with shovel" || textField.text == "Dig with shovel" || textField.text == "dig with the shovel" || textField.text == "Dig with the shovel"){
+				if(holdingShovel == true){
+					rootSprite.addChild(winShovel);
+							
+					if (textField.text == "Play" || textField.text == "play"){
+						removeChildren();
+						removeEventListeners();
+						start();
+					}
+				}	
 			}
 
   			// chair statements, needs interactivity
@@ -567,7 +583,76 @@ public var playerInventory = new List<String>();
 
 
   			// bed statements
-  			if(textField.text == "pick up spring" || textField.text == "get spring" || textField.text == "grab spring"){
+  			
+			if(textField.text == "get in bed" || textField.text == "Get in bed" || textField.text == "lay down in bed" || textField.text == "Lay down in bed" || textField.text == "go to bed" || textField.text == "Go to bed" || textField.text == "lay on bed" || textField.text == "Lay on bed"){
+				// check to see if already laying down
+				if(userSleeping == true || userStandingOnChair == true || userSitting == true){
+					trace("you can't do that it that position");
+				}
+				// check to see if the bed is cut
+				else{
+					if(bedIsCut == true){
+						if(holdingGlass == true){
+							rootSprite.addChild(gameOverGlassWSpring);
+							
+							if (textField.text == "Play" || textField.text == "play"){
+								removeChildren();
+								removeEventListeners();
+								start();
+							}
+						}
+						else{
+							trace("you laid down");
+							rootSprite.removeChild(avatar);
+							rootSprite.removeChild(bed);
+							rootSprite.addChild(sleepingBed);
+							userSleeping = true;
+						}
+					}
+					else{
+						if(holdingGlass == true){
+							rootSprite.addChild(gameOverGlassWSpring);
+							
+							if (textField.text == "Play" || textField.text == "play"){
+								removeChildren();
+								removeEventListeners();
+								start();
+							}
+						}
+						else{
+							trace("you laid down");
+							rootSprite.removeChild(avatar);
+							rootSprite.removeChild(bed);
+							rootSprite.addChild(sleepingBed);
+							userSleeping = true;
+						}
+					}
+				}
+			}
+			
+			if(textField.text == "get up" || textField.text == "Get up" || textField.text == "wake up" || textField.text == "Wake up" || textField.text == "get out of bed" || textField.text == "Get out of bed" ){
+				// check to see if user is sleeping
+				if(userSleeping == true){
+					trace("you woke up...");
+					trace("you noticed the attic on the ceiling while laying down!");
+					rootSprite.addChild(attic);
+					existsAttic = true;
+					userSleeping = false;
+					// check if the bed is cut or not
+					if(bedIsCut == true){
+						rootSprite.removeChild(sleepingCutBed);
+						rootSprite.addChild(cutBed);
+						rootSprite.addChild(avatar);
+					}
+					else{
+						rootSprite.removeChild(sleepingBed);
+						rootSprite.addChild(bed);
+						rootSprite.addChild(avatar);
+					}
+				}
+			}
+			
+			if(textField.text == "pick up spring" || textField.text == "get spring" || textField.text == "grab spring"){
   				if(holdingSpring == true){
   					trace("you already are holding spring");
   				}
