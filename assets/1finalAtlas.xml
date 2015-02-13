@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:8b95e7171836d3d59679c0dcc9fcea15:5e9dfcce2335b6e31e43e27dcd7a7997:72bf38abf32e07a1338bc8076333d099$ -->
+<TextureAtlas imagePath="1finalAssets.png">
+    <SubTexture name="background1" x="2" y="2" width="960" height="480"/>
+    <SubTexture name="gameOverGlass" x="964" y="2" width="960" height="480"/>
+    <SubTexture name="gameOverGlassNoSheet" x="2" y="484" width="960" height="480"/>
+    <SubTexture name="gameOverGlassWSpring" x="964" y="484" width="960" height="480"/>
+    <SubTexture name="gameOverGlassWSpringNoSheet" x="2" y="966" width="960" height="480"/>
+    <SubTexture name="gameOverWindow" x="964" y="966" width="960" height="480"/>
+    <SubTexture name="winSheet" x="2" y="1448" width="960" height="480"/>
+    <SubTexture name="winShovel" x="964" y="1448" width="960" height="480"/>
+</TextureAtlas>

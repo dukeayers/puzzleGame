@@ -28,46 +28,11 @@ class Root extends Sprite {
   public function start(startup:Startup) {
 
     assets = new AssetManager();
-    assets.enqueue("assets/close_door.png");
-    assets.enqueue("assets/window.png");
-    assets.enqueue("assets/brokenWindow.png");
-    assets.enqueue("assets/mainMenu.png");
-    assets.enqueue("assets/background1.png");
-    assets.enqueue("assets/credits.png");
-    assets.enqueue("assets/chair2.png");
-    assets.enqueue("assets/computer.png");
-    assets.enqueue("assets/brokenGlass.png");
-    assets.enqueue("assets/avatarNormal.png");
-    assets.enqueue("assets/avatarDead.png");
-    assets.enqueue("assets/avatarSitting.png");
-    assets.enqueue("assets/avatarStandingOnChair.png");
-    assets.enqueue("assets/table.png");
-    assets.enqueue("assets/bed.png");
-    assets.enqueue("assets/cutBed.png");
-    assets.enqueue("assets/spring.png");
-    assets.enqueue("assets/pbg2.mp3");
-    assets.enqueue("assets/winScreen.png");
-    assets.enqueue("assets/miniChair.png");
-    assets.enqueue("assets/miniGlass.png");
-    assets.enqueue("assets/miniSpring.png");
-    assets.enqueue("assets/winShovel.png");
-    assets.enqueue("assets/attic.png");
-    assets.enqueue("assets/atticOpen.png");
-    assets.enqueue("assets/miniShovel.png");
-    assets.enqueue("assets/sleepingBed.png");
-    assets.enqueue("assets/sleepingCutBed.png");
-    assets.enqueue("assets/gameOverGlass.png");
-    assets.enqueue("assets/gameOverGlassWSpring.png");
-    
-    assets.enqueue("assets/bedNoSheet.png");
-    assets.enqueue("assets/cutBedNoSheet.png");
-    assets.enqueue("assets/gameOverGlassNoSheet.png");
-    assets.enqueue("assets/gameOverGlassWSpringNoSheet.png");
-    assets.enqueue("assets/gameOverWindow.png");
-    assets.enqueue("assets/miniSheet.png");
-    assets.enqueue("assets/sleepingBedNoSheet.png");
-    assets.enqueue("assets/sleepingCutBedNoSheet.png");
-    assets.enqueue("assets/winSheet.png");
+    assets.enqueue("assets/0finalAtlas.xml");
+    assets.enqueue("assets/1finalAtlas.xml");
+    assets.enqueue("assets/0finalAssets.png");
+    assets.enqueue("assets/1finalAssets.png");
+
 
     assets.enqueue("assets/bgmusic.mp3");
     assets.enqueue("assets/doorOpen.mp3");
