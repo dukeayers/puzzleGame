@@ -61,6 +61,7 @@ public var doorOpen:SoundChannel;
 public var bgmusic:SoundChannel;
 public var ripping:SoundChannel;
 public var glassBreak:SoundChannel;
+public var youWin:SoundChannel;
 
 public var bedNoSheet:Image;
 public var cutBedNoSheet:Image;
@@ -342,6 +343,7 @@ public var playerInventory = new List<String>();
   					// win the game, win screen here
                     textOut.text = "";
                     rootSprite.addChild(winScreen);
+		    Root.assets.playSound("youWin");
                     if (textField.text == "Play" || textField.text == "play")
                     {
                             removeChildren();
@@ -368,10 +370,12 @@ public var playerInventory = new List<String>();
   					textOut.text = "You try to push the door, but it seems to be locked.";
   				}
   				else{
+					Root.assets.playSound("doorOpen");
   					textOut.text = "The door opens, YOU WIN!!!";
   					// win the game, win screen here
                     textOut.text = "";
                     rootSprite.addChild(winScreen);
+		    Root.assets.playSound("youWin");
                     if (textField.text == "Play" || textField.text == "play")
                     {
                             removeChildren();
@@ -392,10 +396,12 @@ public var playerInventory = new List<String>();
   					textOut.text = "You try to pull the door, but it seems to be locked.";
   			}
   				else{
+					Root.assets.playSound("doorOpen");
   					textOut.text = "The door opens, YOU WIN!!!";
   					// win the game, win screen here
                     textOut.text = "";
                     rootSprite.addChild(winScreen);
+		    Root.assets.playSound("youWin");
                     if (textField.text == "Play" || textField.text == "play")
                     {
                             removeChildren();
@@ -469,6 +475,7 @@ public var playerInventory = new List<String>();
 				if(holdingSheet == true){
 					removeChildren();
 					rootSprite.addChild(winSheet);
+					Root.assets.playSound("youWin");
 					if (textField.text == "Play" || textField.text == "play"){
 						removeChildren();
 						removeEventListeners();
@@ -583,6 +590,7 @@ public var playerInventory = new List<String>();
 				if(holdingShovel == true){
 					removeChildren();
 					rootSprite.addChild(winShovel);
+					Root.assets.playSound("youWin");
 							
 					if (textField.text == "Play" || textField.text == "play"){
 						removeChildren();
