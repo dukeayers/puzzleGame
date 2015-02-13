@@ -235,16 +235,27 @@ public var playerInventory = new List<String>();
         //Starling.setFocus("textField");
 
         //This is for outputting text
+        textOut = new flash.text.TextField();
+        textOutFormat = new TextFormat("Arial", 18, 0x000000);
+        textOutFormat.align = TextFormatAlign.LEFT;
+        textOut.defaultTextFormat = textOutFormat;
+        textOut.background = true;
+        textOut.backgroundColor = 0xfdffef;
+        textOut.width = 400;
+        textOut.x = 0;
+        textOut.y = 0;
+        Starling.current.nativeOverlay.addChild(textOut);
+
     textOut = new flash.text.TextField();
-    textOutFormat = new TextFormat("Arial", 18, 0xffffff);
+    textOutFormat = new TextFormat("Arial", 18, 0x000000);
     textOutFormat.align = TextFormatAlign.LEFT;
     textOut.defaultTextFormat = textOutFormat;
     textOut.background = true;
-    textOut.backgroundColor = 0x50826e;
+    textOut.backgroundColor = 0xfdffef;
     textOut.width = 700;
     textOut.x = 0;
-    textOut.y = 520;
-    Starling.current.nativeOverlay.addChild(textField);
+    textOut.y = 0;
+    Starling.current.nativeOverlay.addChild(textOut);
 
 		textField.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 
@@ -258,20 +269,19 @@ public var playerInventory = new List<String>();
 
 		// door statements, should be changed to do stuff later
 		if(textField.text == "Door" || textField.text == "door"){
-  			trace("You see a wooden door.");
+  			textOut.text = "You see a wooden door.";
   		}
   		if(textField.text == "Open door" || textField.text == "open door" || textField.text == "open the door"){
   			if(userSitting == true){
   				//trace("you cant do that because you are sitting");
                 textOut.text = "You can't do that because you are sitting";
-                trace(textOut.text);
   			}
   			else{
   				if(doorLocked == true){
-  					trace("You try to open the door, but it seems to be locked.");
+  					textOut.text = "You try to open the door, but it seems to be locked.";
   			}
   				else{
-  					trace("The door opens, YOU WIN!!!");
+  					textOut.text = "The door opens, YOU WIN!!!";
   					// win the game, win screen here
                     rootSprite.addChild(winScreen);
                     if (textField.text == "Play" || textField.text == "play")
@@ -286,21 +296,21 @@ public var playerInventory = new List<String>();
   		}
   		if(textField.text == "Kick door" || textField.text == "kick door" || textField.text == "kick in door" || textField.text == "kick down door" 
   			|| textField.text == "kick the door"){
-  			trace("You kick the door, but it won't budge.");
+  			textOut.text = "You kick the door, but it won't budge.";
 		}
  		if(textField.text == "Knock on door" || textField.text == "knock on door" || textField.text == "knock on the door"){
-  			trace("You knock on the door, but no one answers.");
+  			textOut.text = "You knock on the door, but no one answers.";
   		}
   		if(textField.text == "Push door" || textField.text == "push door" || textField.text == "push on the door" || textField.text == "push the door"){
   			if(userSitting == true){
-  				trace("You cannot do that because you are sitting.");
+  				textOut.text = "You cannot do that because you are sitting.";
   			}
   			else{
   				if(doorLocked == true){
-  					trace("You try to push the door, but it seems to be locked.");
+  					textOut.text = "You try to push the door, but it seems to be locked.";
   				}
   				else{
-  					trace("The door opens, YOU WIN!!!");
+  					textOut.text = "The door opens, YOU WIN!!!";
   					// win the game, win screen here
                     rootSprite.addChild(winScreen);
                     if (textField.text == "Play" || textField.text == "play")
@@ -316,14 +326,14 @@ public var playerInventory = new List<String>();
 
   		if(textField.text == "Pull door" || textField.text == "pull door" || textField.text == "pull on the door" || textField.text == "pull the door"){
   			if(userSitting == true){
-  				trace("You cant do that because you are sitting still.");
+  				textOut.text = "You cant do that because you are sitting still.";
   			}
   			else{
   				if(doorLocked == true){
-  					trace("You try to pull the door, but it seems to be locked.");
+  					textOut.text = "You try to pull the door, but it seems to be locked.";
   			}
   				else{
-  					trace("The door opens, YOU WIN!!!");
+  					textOut.text = "The door opens, YOU WIN!!!";
   					// win the game, win screen here
                     rootSprite.addChild(winScreen);
                     if (textField.text == "Play" || textField.text == "play")
@@ -338,20 +348,20 @@ public var playerInventory = new List<String>();
   		if(textField.text == "Pick door" || textField.text == "pick door" || textField.text == "unlock door" 
   			|| textField.text == "pick door lock" || textField.text == "pick lock"){
   			if(userSitting == true){
-  				trace("You cannot do that, you are still sitting.");
+  				textOut.text = "You cannot do that, you are still sitting.";
   			}
   			else{
   				if(doorLocked == true){
   					if(holdingSpring == true){
-  						trace("You pick the door lock with the spring. The door unlocks.");
+  						textOut.text = "You pick the door lock with the spring. \nThe door unlocks.";
   						doorLocked = false;
   					}
   					else{
-  						trace("You have nothing to pick the door's lock with.");
+  						textOut.text = "You have nothing to pick the door's lock with.";
   					}
   				}
   				else{
-  					trace("the door is already unlocked");
+  					textOut.text = "the door is already unlocked";
   				}	
   			}
   		}
@@ -359,14 +369,14 @@ public var playerInventory = new List<String>();
 
   		// window statements, need to add interacitivity later
   		if(textField.text == "Window" || textField.text == "window"){
-  			trace("You see a window.");
+  			textOut.text = "You see a window.";
   		}
   		if(textField.text == "Open window" || textField.text == "open window" || textField.text == "open the window"){
   			if(userSitting == true){
-  				trace("you cant, you are sitting still");
+  				textOut.text = "you cant, you are sitting still";
   			}
   			else{
-  				trace("you try to open the window, but it doensn't budge.");
+  				textOut.text = "you try to open the window, but it doensn't budge.";
   			}
   		}
 
@@ -375,15 +385,15 @@ public var playerInventory = new List<String>();
 
 
   			if(userSitting == true){
-  				trace("you cant do that you are sitting.");
+  				textOut.text = "you cant do that you are sitting.";
 
   			}
   			else{
   				if(holdingChair == false){
-  					trace("You have nothing to break the window with.");
+  					textOut.text = "You have nothing to break the window with.";
   				}
   				else{
-  					trace("You break the window with the chair.");
+  					textOut.text = "You break the window with the chair.";
   					rootSprite.removeChild(window);
   					rootSprite.addChild(brokenWindow);
   					rootSprite.addChild(brokenGlass);
@@ -392,7 +402,7 @@ public var playerInventory = new List<String>();
   		}
 
   		if(textField.text == "Crawl out window" || textField.text == "crawl out window" || textField.text == "go out window" || textField.text == "escape through window"){
-  			trace("The window is shut, you cannot crawl out.");
+  			textOut.text = "The window is shut, you cannot crawl out.";
   			}
 
 
@@ -400,14 +410,14 @@ public var playerInventory = new List<String>();
   		if(textField.text == "Pick up glass" || textField.text == "pick up glass" || textField.text == "get glass" || textField.text == "pickup broken glass"
   		 || textField.text == "pick up broken glass"){
   		 	if(userSitting == true){
-  		 		trace("you cant, you are still sitting");
+  		 		textOut.text = "you cant, you are still sitting";
   		 	}
   		 	else{
   		 		if(holdingGlass == true){
-  					trace("You already picked the glass up.");
+  					textOut.text = "You already picked the glass up.";
   			}
   				else{
-  					trace("You pick up the broken glass.");
+  					textOut.text = "You pick up the broken glass.";
   					playerInventory.add("Broken Glass");
 					rootSprite.addChild(miniGlass);
   					rootSprite.removeChild(brokenGlass);
@@ -418,18 +428,18 @@ public var playerInventory = new List<String>();
   			if(textField.text == "Put down glass" || textField.text == "put down glass" || textField.text == "drop glass" || textField.text == "drop broken glass" 
   				|| textField.text == "get rid of glass"){
   				if(userSitting == true){
-  					trace("you cant, you are still sitting");
+  					textOut.text = "you cant, you are still sitting";
   				}
   				else{
   					if(holdingGlass == true){
-  						trace("You put the broken glass back down on the floor.");
+  						textOut.text = "You put the broken glass back down on the floor.";
   						playerInventory.remove("Broken Glass");
 						rootSprite.removeChild(miniGlass);
   						holdingGlass = false;
   						rootSprite.addChild(brokenGlass);
   					}
   					else{
-  						trace("You did not pick up the glass.");
+  						textOut.text = "You did not pick up the glass.";
   					}
   				}
   			}	
@@ -437,17 +447,17 @@ public var playerInventory = new List<String>();
         	if(textField.text == "Cut bed" || textField.text == "cut bed" || textField.text == "cut bed with glass" || textField.text == "cut open bed" 
         		|| textField.text == "cut mattress open" || textField.text == "cut mattress"){
         		if(userSitting == true){
-        			trace("cant, still sitting");
+        			textOut.text = "cant, still sitting";
         		}
         		else{
         			if(holdingGlass == true){
-            			trace("You cut open the bed with the broken glass.");
+            			textOut.text = "You cut open the bed with the broken glass.";
             			rootSprite.removeChild(bed);
             			rootSprite.addChild(cutBed);
             			rootSprite.addChild(spring);
           			}
           			else{
-          				trace("you have nothing to cut the bed with");
+          				textOut.text = "you have nothing to cut the bed with";
           			}
         		}
         	}
@@ -460,8 +470,8 @@ public var playerInventory = new List<String>();
 				if(existsAttic == true){
 					if(userStandingOnChair == true){
 						if(holdingShovel == false){
-							trace("looking inside the attic. . .");
-							trace("you found a shovel!");
+							textOut.text = "looking inside the attic. . .";
+							textOut.text = "you found a shovel!";
 							playerInventory.add("Shovel");
 							rootSprite.addChild(miniShovel);
 							holdingShovel = true;
@@ -470,7 +480,7 @@ public var playerInventory = new List<String>();
 						}
 					}
 					else{
-						trace("you can't seem to reach the attic");
+						textOut.text = "you can't seem to reach the attic";
 					}
 				}
 			}
@@ -490,14 +500,14 @@ public var playerInventory = new List<String>();
   			// chair statements, needs interactivity
 			if(textField.text == "Stand on chair" || textField.text == "stand on chair" || textField.text == "Stand on the chair" || textField.text == "stand on the chair"){
 				if(userStandingOnChair == true){
-  					trace("you are already standing on the chair");
+  					textOut.text = "you are already standing on the chair";
   				}
   				else{
   					if(holdingChair == true){
-  						trace("there is no chair to stand on.");
+  						textOut.text = "there is no chair to stand on.";
   					}
   					else{
-  						trace("you stood on the chair");
+  						textOut.text = "you stood on the chair";
   						userStandingOnChair = true;
   						rootSprite.removeChild(avatar);
   						rootSprite.removeChild(chair);
@@ -509,7 +519,7 @@ public var playerInventory = new List<String>();
 			if(textField.text == "get off chair" || textField.text == "Get off chair" || textField.text == "get down" || textField.text == "Get down" || textField.text == "step down" || textField.text == "Step down"){
   				if(userStandingOnChair == true){
   					userStandingOnChair = false;
-  					trace("you got off the chair");
+  					textOut.text = "you got off the chair";
   					rootSprite.removeChild(avatarStandingOnChair);
   					rootSprite.addChild(avatar);
   					rootSprite.addChild(chair);
@@ -518,14 +528,14 @@ public var playerInventory = new List<String>();
 			
   			if(textField.text == "Sit on chair" || textField.text == "sit on chair" || textField.text == "sit"){
   				if(userSitting == true){
-  					trace("you are already sitting in the chair");
+  					textOut.text = "you are already sitting in the chair";
   				}
   				else{
   					if(holdingChair == true){
-  						trace("there is no chair to sit down on.");
+  						textOut.text = "there is no chair to sit down on.";
   					}
   					else{
-  						trace("you sit down on the chair");
+  						textOut.text = "you sit down on the chair";
   						userSitting = true;
   						rootSprite.removeChild(avatar);
   						rootSprite.removeChild(chair);
@@ -536,13 +546,13 @@ public var playerInventory = new List<String>();
   			if(textField.text == "Stand up" || textField.text == "stand up" || textField.text == "stand"|| textField.text == "get up" ){
   				if(userSitting == true){
   					userSitting = false;
-  					trace("you stand up");
+  					textOut.text = "you stand up";
   					rootSprite.removeChild(avatarSitting);
   					rootSprite.addChild(avatar);
   					rootSprite.addChild(chair);
   				}
   				else{
-  					trace("you are already standing");
+  					textOut.text = "you are already standing";
   				}
   			}
 
@@ -552,14 +562,14 @@ public var playerInventory = new List<String>();
   			if(textField.text == "Pick up chair" || textField.text == "pick up chair" || textField.text == "grab chair" || textField.text == "pick up the chair"){
   				// check to see if player is already holding the chair
   				if(userSitting == true){
-  					trace("you are sitting in the chair");
+  					textOut.text = "you are sitting in the chair";
   				}
   				else{
   					if(holdingChair == true){
-  						trace("You are already holding the chair.");
+  						textOut.text = "You are already holding the chair.";
   					}
   					else{
-  						trace("You pick up the chair.");
+  						textOut.text = "You pick up the chair.";
   						playerInventory.add("Chair");
 						rootSprite.addChild(miniChair);
   						rootSprite.removeChild(chair);
@@ -571,14 +581,14 @@ public var playerInventory = new List<String>();
   			if(textField.text == "Put down chair" || textField.text == "put down chair" || textField.text == "set down chair" || textField.text == "drop chair" 
   				|| textField.text == "get rid of chair"){
   				if(holdingChair == true){
-  					trace("You set the chair down.");
+  					textOut.text = "You set the chair down.";
   					rootSprite.addChild(chair);
   					playerInventory.remove("Chair");
 					rootSprite.removeChild(miniChair);
   					holdingChair = false;
   				}
   				else{
-  					trace("You are not holding the chair.");
+  					textOut.text = "You are not holding the chair.";
   				}
   			}
 
@@ -588,7 +598,7 @@ public var playerInventory = new List<String>();
 			if(textField.text == "get in bed" || textField.text == "Get in bed" || textField.text == "lay down in bed" || textField.text == "Lay down in bed" || textField.text == "go to bed" || textField.text == "Go to bed" || textField.text == "lay on bed" || textField.text == "Lay on bed"){
 				// check to see if already laying down
 				if(userSleeping == true || userStandingOnChair == true || userSitting == true){
-					trace("you can't do that it that position");
+					textOut.text = "you can't do that it that position";
 				}
 				// check to see if the bed is cut
 				else{
@@ -603,7 +613,7 @@ public var playerInventory = new List<String>();
 							}
 						}
 						else{
-							trace("you laid down");
+							textOut.text = "you laid down";
 							rootSprite.removeChild(avatar);
 							rootSprite.removeChild(bed);
 							rootSprite.addChild(sleepingBed);
@@ -621,7 +631,7 @@ public var playerInventory = new List<String>();
 							}
 						}
 						else{
-							trace("you laid down");
+							textOut.text = "you laid down";
 							rootSprite.removeChild(avatar);
 							rootSprite.removeChild(bed);
 							rootSprite.addChild(sleepingBed);
@@ -634,8 +644,8 @@ public var playerInventory = new List<String>();
 			if(textField.text == "get up" || textField.text == "Get up" || textField.text == "wake up" || textField.text == "Wake up" || textField.text == "get out of bed" || textField.text == "Get out of bed" ){
 				// check to see if user is sleeping
 				if(userSleeping == true){
-					trace("you woke up...");
-					trace("you noticed the attic on the ceiling while laying down!");
+					textOut.text = "you woke up...";
+					textOut.text = "you noticed the attic on the ceiling while laying down!";
 					rootSprite.addChild(attic);
 					existsAttic = true;
 					userSleeping = false;
@@ -655,26 +665,26 @@ public var playerInventory = new List<String>();
 			
 			if(textField.text == "pick up spring" || textField.text == "get spring" || textField.text == "grab spring"){
   				if(holdingSpring == true){
-  					trace("you already are holding spring");
+  					textOut.text = "you already are holding spring";
   				}
   				else{
-  					trace("you pickup a spring");
+  					textOut.text = "you pickup a spring";
   					playerInventory.add("Spring");
 					rootSprite.addChild(miniSpring);
   					rootSprite.removeChild(spring);
   					holdingSpring = true;
   				}
-  				trace("You sit down on the chair.");
+  				textOut.text = "You sit down on the chair.";
   			}
 
   			//computer statements
   			if(textField.text =="use computer"){
   				if(userSitting == true){
-  					trace("You turn on the computer...");
+  					textOut.text = "You turn on the computer...";
   					// go to computer terminal screen here
   				}
   				else{
-  					trace("you cant use the computer while standing");
+  					textOut.text = "you cant use the computer while standing";
   				}
   			}
 
@@ -685,7 +695,7 @@ public var playerInventory = new List<String>();
             //stage.focus = textField;
             //textField.setSelection(textField.text.length, textField.text.length);
 
-  			trace("Inventory: " + playerInventory);
+  			//textOut.text = "Inventory: " + playerInventory;
 		}
 	}
 }
