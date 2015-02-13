@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:8f89895a18fd3fccc6905c87e7414b89:72871612a3df9765df9aff40223eb3e2:1a66af70db76ffd94b1548becb19a91b$ -->
+<TextureAtlas imagePath="assets.png">
+    <SubTexture name="attic" x="1073" y="1984" width="64" height="44"/>
+    <SubTexture name="atticOpen" x="1139" y="1984" width="64" height="44"/>
+    <SubTexture name="avatarDancing1" x="964" y="1812" width="107" height="227"/>
+    <SubTexture name="avatarDancing2" x="1073" y="1527" width="107" height="227"/>
+    <SubTexture name="avatarDead" x="1073" y="1756" width="107" height="226"/>
+    <SubTexture name="avatarNormal" x="1182" y="1527" width="107" height="226"/>
+    <SubTexture name="avatarSitting" x="1670" y="1752" width="107" height="190" frameX="-37" frameY="-68" frameWidth="172" frameHeight="289"/>
+    <SubTexture name="avatarStandingOnChair" x="964" y="1527" width="107" height="283" frameX="0" frameY="-93" frameWidth="107" frameHeight="376"/>
+    <SubTexture name="avatarWinning" x="1182" y="1755" width="107" height="226" frameX="-166" frameY="-129" frameWidth="435" frameHeight="468"/>
+    <SubTexture name="bed" x="1291" y="1527" width="225" height="223" frameX="-47" frameY="-127" frameWidth="350" frameHeight="350"/>
+    <SubTexture name="bedSpring" x="1926" y="166" width="17" height="20" frameX="-2" frameY="0" frameWidth="20" frameHeight="20"/>
+    <SubTexture name="brokenGlass" x="1518" y="1957" width="160" height="78" frameX="-89" frameY="-132" frameWidth="320" frameHeight="240"/>
+    <SubTexture name="brokenWindow" x="1680" y="1944" width="100" height="100"/>
+    <SubTexture name="chair2" x="1782" y="1904" width="64" height="110"/>
+    <SubTexture name="close_door" x="1779" y="1752" width="75" height="150"/>
+    <SubTexture name="computer" x="1518" y="1752" width="150" height="203"/>
+    <SubTexture name="credits" x="964" y="524" width="960" height="519" frameX="-1" frameY="0" frameWidth="962" frameHeight="520"/>
+    <SubTexture name="cutBed" x="1291" y="1752" width="225" height="223" frameX="-47" frameY="-127" frameWidth="350" frameHeight="350"/>
+    <SubTexture name="gameOverGlass" x="964" y="1045" width="960" height="480"/>
+    <SubTexture name="gameOverGlassWSpring" x="2" y="1046" width="960" height="480"/>
+    <SubTexture name="loading" x="2" y="2" width="960" height="520"/>
+    <SubTexture name="mainMenu" x="964" y="2" width="960" height="520"/>
+    <SubTexture name="miniChair" x="1926" y="2" width="40" height="39"/>
+    <SubTexture name="miniGlass" x="1926" y="43" width="40" height="39"/>
+    <SubTexture name="miniShovel" x="1926" y="84" width="40" height="39"/>
+    <SubTexture name="miniSpring" x="1926" y="125" width="40" height="39"/>
+    <SubTexture name="sleepingBed" x="1518" y="1527" width="225" height="223" frameX="-47" frameY="-127" frameWidth="350" frameHeight="350"/>
+    <SubTexture name="sleepingCutBed" x="1745" y="1527" width="225" height="223" frameX="-47" frameY="-127" frameWidth="350" frameHeight="350"/>
+    <SubTexture name="spring" x="1945" y="166" width="17" height="20" frameX="-2" frameY="0" frameWidth="20" frameHeight="20"/>
+    <SubTexture name="table" x="1848" y="1904" width="125" height="76"/>
+    <SubTexture name="winScreen" x="2" y="524" width="960" height="520"/>
+    <SubTexture name="winShovel" x="2" y="1528" width="960" height="480"/>
+    <SubTexture name="window" x="1856" y="1752" width="100" height="100"/>
+</TextureAtlas>
