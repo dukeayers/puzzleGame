@@ -74,6 +74,7 @@ public var userSleeping:Bool = false;
 public var userStandingOnChair:Bool = false;
 public var existsAttic:Bool = false;
 
+
 public var playerInventory = new List<String>();
 
 	
