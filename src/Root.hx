@@ -59,6 +59,10 @@ class Root extends Sprite {
     assets.enqueue("assets/gameOverGlass.png");
     assets.enqueue("assets/gameOverGlassWSpring.png");
 
+    assets.enqueue("assets/bgmusic.mp3");
+    assets.enqueue("assets/atlas.xml");
+    assets.enqueue("assets/assets.png");
+    
 
     assets.loadQueue(function onProgress(ratio:Float) {
 		if (ratio == 1) {
@@ -70,10 +74,6 @@ class Root extends Sprite {
       assets.playSound("bgmusic");
 			main.start();
 
-			// closeDoor = new Image(Root.assets.getTexture("close_door"));
-			// closeDoor.x = 200;
-			// closeDoor.y = 200;
-			// addChild(closeDoor);
 		}});
 	}
       });
