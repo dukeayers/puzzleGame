@@ -67,7 +67,6 @@ class Main extends Sprite{
   					textField.text = "";
   				}
   				else{
-  					trace("Nope");
   					textField.text = "";
   				}
   			}

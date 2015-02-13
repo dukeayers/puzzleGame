@@ -11,6 +11,7 @@ import flash.text.TextFieldAutoSize;
 import flash.text.TextFieldType;
 import flash.text.TextFormatAlign;
 import flash.events.*;
+import flash.text.*;
 import flash.media.SoundChannel;
 
 //These imports are for setting the textField focus
@@ -92,6 +93,7 @@ public var userSleeping:Bool = false;
 public var userStandingOnChair:Bool = false;
 public var existsAttic:Bool = false;
 public var removedSheet:Bool = false;
+public var gameComplete:Bool = false;
 
 
 public var playerInventory = new List<String>();
@@ -296,8 +298,8 @@ public var playerInventory = new List<String>();
     textOutFormat = new TextFormat("Arial", 18, 0x000000);
     textOutFormat.align = TextFormatAlign.LEFT;
     textOut.defaultTextFormat = textOutFormat;
-    textOut.background = true;
-    textOut.backgroundColor = 0xfdffef;
+    textOut.background = false;
+    // textOut.backgroundColor = 0x00fdffef;
     textOut.width = 400;
     textOut.x = 0;
     textOut.y = 0;
@@ -307,555 +309,488 @@ public var playerInventory = new List<String>();
     textOutFormat = new TextFormat("Arial", 18, 0x000000);
     textOutFormat.align = TextFormatAlign.LEFT;
     textOut.defaultTextFormat = textOutFormat;
-    textOut.background = true;
-    textOut.backgroundColor = 0xfdffef;
+    textOut.background = false;
+    // textOut.backgroundColor = 0xfdffef;
     textOut.width = 480;
     textOut.x = 0;
     textOut.y = 0;
     Starling.current.nativeOverlay.addChild(textOut);
+
 
 		textField.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 
 	}
 
 	public function keyDown(event:KeyboardEvent ){
-		var keyCode = event.keyCode;
-		if (keyCode == 13){
-
-
-
-		// door statements, should be changed to do stuff later
-		if(textField.text == "Door" || textField.text == "door"){
-  			textOut.text = "You see a wooden door.";
-  		}
-  		if(textField.text == "Open door" || textField.text == "open door" || textField.text == "open the door"){
-  			if(userSitting == true){
-  				//trace("you cant do that because you are sitting");
+    var keyCode = event.keyCode;
+    if (keyCode == 13) {
+        // door statements, should be changed to do stuff later
+        if (textField.text == "Door" || textField.text == "door") {
+            textOut.text = "You see a wooden door.";
+        }
+        if (textField.text == "Open door" || textField.text == "open door" || textField.text == "open the door") {
+            if (userSitting == true) {
+                //trace("you cant do that because you are sitting");
                 textOut.text = "You can't do that because you are sitting";
-  			}
-  			else{
-  				if(doorLocked == true){
-  					textOut.text = "You try to open the door, but it seems to be locked.";
-  			}
-  				else{
-					Root.assets.playSound("doorOpen");
-  					textOut.text = "The door opens, YOU WIN!!!";
-  					// win the game, win screen here
+            } else {
+                if (doorLocked == true) {
+                    textOut.text = "You try to open the door, but it seems to be locked.";
+                } else {
+                    Root.assets.playSound("doorOpen");
+                    textOut.text = "The door opens, YOU WIN!!!";
+                    // win the game, win screen here
                     textOut.text = "";
                     rootSprite.addChild(winScreen);
-		    Root.assets.playSound("youWin");
-                    if (textField.text == "Play" || textField.text == "play")
-                    {
-                            removeChildren();
-                            removeEventListeners();
-                            start();
-                    }
-  				}	
-  			}
-  			
-  		}
-  		if(textField.text == "Kick door" || textField.text == "kick door" || textField.text == "kick in door" || textField.text == "kick down door" 
-  			|| textField.text == "kick the door"){
-  			textOut.text = "You kick the door, but it won't budge.";
-		}
- 		if(textField.text == "Knock on door" || textField.text == "knock on door" || textField.text == "knock on the door"){
-  			textOut.text = "You knock on the door, but no one answers.";
-  		}
-  		if(textField.text == "Push door" || textField.text == "push door" || textField.text == "push on the door" || textField.text == "push the door"){
-  			if(userSitting == true){
-  				textOut.text = "You cannot do that because you are sitting.";
-  			}
-  			else{
-  				if(doorLocked == true){
-  					textOut.text = "You try to push the door, but it seems to be locked.";
-  				}
-  				else{
-					Root.assets.playSound("doorOpen");
-  					textOut.text = "The door opens, YOU WIN!!!";
-  					// win the game, win screen here
+                    Root.assets.playSound("youWin");
+                    gameComplete = true;
+
+                }
+            }
+
+        }
+        if (textField.text == "Kick door" || textField.text == "kick door" || textField.text == "kick in door" || textField.text == "kick down door" || textField.text == "kick the door") {
+            textOut.text = "You kick the door, but it won't budge.";
+        }
+        if (textField.text == "Knock on door" || textField.text == "knock on door" || textField.text == "knock on the door") {
+            textOut.text = "You knock on the door, but no one answers.";
+        }
+        if (textField.text == "Push door" || textField.text == "push door" || textField.text == "push on the door" || textField.text == "push the door") {
+            if (userSitting == true) {
+                textOut.text = "You cannot do that because you are sitting.";
+            } else {
+                if (doorLocked == true) {
+                    textOut.text = "You try to push the door, but it seems to be locked.";
+                } else {
+                    Root.assets.playSound("doorOpen");
+                    textOut.text = "The door opens, YOU WIN!!!";
+                    // win the game, win screen here
+                    textOut.text = "";
+                    //rootSprite.addChild(winScreen);
+                    gameComplete = true;
+                    Root.assets.playSound("youWin");
+                }
+            }
+        }
+
+
+        if (textField.text == "Pull door" || textField.text == "pull door" || textField.text == "pull on the door" || textField.text == "pull the door") {
+            if (userSitting == true) {
+                textOut.text = "You cant do that because you are sitting still.";
+            } else {
+                if (doorLocked == true) {
+                    textOut.text = "You try to pull the door, but it seems to be locked.";
+                } else {
+                    Root.assets.playSound("doorOpen");
+                    textOut.text = "The door opens, YOU WIN!!!";
+                    // win the game, win screen here
                     textOut.text = "";
                     rootSprite.addChild(winScreen);
-		    Root.assets.playSound("youWin");
-                    if (textField.text == "Play" || textField.text == "play")
-                    {
-                            removeChildren();
-                            removeEventListeners();
-                            start();
+                    Root.assets.playSound("youWin");
+                    gameComplete = true;
+
+                }
+            }
+        }
+        if (textField.text == "Pick door" || textField.text == "pick door" || textField.text == "unlock door" || textField.text == "pick door lock" || textField.text == "pick lock") {
+            if (userSitting == true) {
+                textOut.text = "You cannot do that, you are still sitting.";
+            } else {
+                if (doorLocked == true) {
+                    if (holdingSpring == true) {
+                        textOut.text = "You pick the door lock with the spring. \nThe door unlocks.";
+                        doorLocked = false;
+                    } else {
+                        textOut.text = "You have nothing to pick the door's lock with.";
                     }
-  				}
-  			}
-  		}
+                } else {
+                    textOut.text = "the door is already unlocked";
+                }
+            }
+        }
 
 
-  		if(textField.text == "Pull door" || textField.text == "pull door" || textField.text == "pull on the door" || textField.text == "pull the door"){
-  			if(userSitting == true){
-  				textOut.text = "You cant do that because you are sitting still.";
-  			}
-  			else{
-  				if(doorLocked == true){
-  					textOut.text = "You try to pull the door, but it seems to be locked.";
-  			}
-  				else{
-					Root.assets.playSound("doorOpen");
-  					textOut.text = "The door opens, YOU WIN!!!";
-  					// win the game, win screen here
+        // window statements, need to add interacitivity later
+        if (textField.text == "Window" || textField.text == "window") {
+            textOut.text = "You see a window.";
+        }
+
+        if (textField.text == "Open window" || textField.text == "open window" || textField.text == "open the window") {
+            if (userSitting == true) {
+                textOut.text = "you cant, you are sitting still";
+            } else {
+                textOut.text = "you try to open the window, but it doensn't budge.";
+            }
+        }
+
+        if (textField.text == "Break window" || textField.text == "break window" || textField.text == "punch window" || textField.text == "hit window with chair" || textField.text == "smash window" || textField.text == "break the window") {
+
+
+            if (userSitting == true) {
+                textOut.text = "you cant do that you are sitting.";
+
+            } else {
+                if (holdingChair == false) {
+                    textOut.text = "You have nothing to break the window with.";
+                } else {
+                    textOut.text = "You break the window with the chair.";
+                    Root.assets.playSound("glassBreak");
+                    windowOpen = true;
+                    rootSprite.removeChild(window);
+                    rootSprite.addChild(brokenWindow);
+                    rootSprite.addChild(brokenGlass);
+                }
+            }
+        }
+
+        if (textField.text == "Crawl out window" || textField.text == "crawl out window" || textField.text == "go out window" || textField.text == "escape through window") {
+            if (windowOpen == true) {
+                if (holdingSheet == true) {
+                    removeChildren();
+                    rootSprite.addChild(winSheet);
+                    Root.assets.playSound("youWin");
                     textOut.text = "";
-                    rootSprite.addChild(winScreen);
-		    Root.assets.playSound("youWin");
-                    if (textField.text == "Play" || textField.text == "play")
-                    {
-                            removeChildren();
-                            removeEventListeners();
-                            start();
+                    gameComplete = true;
+                } else {
+                    removeChildren();
+                    textOut.text = "";
+                    Root.assets.playSound("bgmusic");
+                    rootSprite.addChild(gameOverWindow);
+                    gameComplete = true;
+                }
+            } else {
+                textOut.text = "The window is shut, you cannot crawl out.";
+            }
+        }
+
+
+        //glass statements
+        if (textField.text == "Pick up glass" || textField.text == "pick up glass" || textField.text == "get glass" || textField.text == "pickup broken glass" || textField.text == "pick up broken glass") {
+            if (userSitting == true) {
+                textOut.text = "you cant, you are still sitting";
+            } else {
+                if (holdingGlass == true) {
+                    textOut.text = "You already picked the glass up.";
+                } else {
+                    textOut.text = "You pick up the broken glass.";
+                    playerInventory.add("Broken Glass");
+                    rootSprite.addChild(miniGlass);
+                    rootSprite.removeChild(brokenGlass);
+                    holdingGlass = true;
+                }
+            }
+        }
+        if (textField.text == "Put down glass" || textField.text == "put down glass" || textField.text == "drop glass" || textField.text == "drop broken glass" || textField.text == "get rid of glass") {
+            if (userSitting == true) {
+                textOut.text = "you cant, you are still sitting";
+            } else {
+                if (holdingGlass == true) {
+                    textOut.text = "You put the broken glass back down on the floor.";
+                    playerInventory.remove("Broken Glass");
+                    rootSprite.removeChild(miniGlass);
+                    holdingGlass = false;
+                    rootSprite.addChild(brokenGlass);
+                } else {
+                    textOut.text = "You did not pick up the glass.";
+                }
+            }
+        }
+
+        if (textField.text == "Cut bed" || textField.text == "cut bed" || textField.text == "cut bed with glass" || textField.text == "cut open bed" || textField.text == "cut mattress open" || textField.text == "cut mattress") {
+            if (userSitting == true) {
+                textOut.text = "cant, still sitting";
+            } else {
+                if (holdingGlass == true) {
+                    textOut.text = "You cut open the bed with the broken glass.";
+                    Root.assets.playSound("ripping");
+                    rootSprite.removeChild(bed);
+                    // check if sheet is on bed
+                    if (removedSheet == true) {
+                        rootSprite.addChild(cutBedNoSheet);
+                    } else {
+                        rootSprite.addChild(cutBed);
+                        rootSprite.addChild(spring);
                     }
-  				}
-  			}
-  		}
-  		if(textField.text == "Pick door" || textField.text == "pick door" || textField.text == "unlock door" 
-  			|| textField.text == "pick door lock" || textField.text == "pick lock"){
-  			if(userSitting == true){
-  				textOut.text = "You cannot do that, you are still sitting.";
-  			}
-  			else{
-  				if(doorLocked == true){
-  					if(holdingSpring == true){
-  						textOut.text = "You pick the door lock with the spring. \nThe door unlocks.";
-  						doorLocked = false;
-  					}
-  					else{
-  						textOut.text = "You have nothing to pick the door's lock with.";
-  					}
-  				}
-  				else{
-  					textOut.text = "the door is already unlocked";
-  				}	
-  			}
-  		}
+                    bedIsCut = true;
+                } else {
+                    textOut.text = "you have nothing to cut the bed with";
+                }
+            }
+        }
 
 
-  		// window statements, need to add interacitivity later
-  		if(textField.text == "Window" || textField.text == "window"){
-  			textOut.text = "You see a window.";
-  		}
-		
-  		if(textField.text == "Open window" || textField.text == "open window" || textField.text == "open the window"){
-  			if(userSitting == true){
-  				textOut.text = "you cant, you are sitting still";
-  			}
-  			else{
-  				textOut.text = "you try to open the window, but it doensn't budge.";
-  			}
-  		}
 
-  		if(textField.text == "Break window" || textField.text == "break window" || textField.text == "punch window"|| textField.text == "hit window with chair"|| 
-  			textField.text == "smash window" || textField.text == "break the window"){
+        // attic statements
 
+        if (textField.text == "open attic" || textField.text == "Open attic" || textField.text == "open the attic" || textField.text == "Open the attic" || textField.text == "look in attic" || textField.text == "Look in attic") {
+            if (existsAttic == true) {
+                if (userStandingOnChair == true) {
+                    if (holdingShovel == false) {
+                        textOut.text = "looking inside the attic. . .";
+                        textOut.text = "you found a shovel!";
+                        playerInventory.add("Shovel");
+                        rootSprite.addChild(miniShovel);
+                        holdingShovel = true;
+                        rootSprite.removeChild(attic);
+                        rootSprite.addChild(atticOpen);
+                    }
+                } else {
+                    textOut.text = "you can't seem to reach the attic";
+                }
+            }
+        }
 
-  			if(userSitting == true){
-  				textOut.text = "you cant do that you are sitting.";
+        if (textField.text == "dig a hole" || textField.text == "Dig a hole" || textField.text == "dig with shovel" || textField.text == "Dig with shovel" || textField.text == "dig with the shovel" || textField.text == "Dig with the shovel") {
+            if (holdingShovel == true) {
+                removeChildren();
+                rootSprite.addChild(winShovel);
+                Root.assets.playSound("youWin");
+                textOut.text = ""; 
+                gameComplete = true;
+            }
+        }
 
-  			}
-  			else{
-  				if(holdingChair == false){
-  					textOut.text = "You have nothing to break the window with.";
-  				}
-  				else{
-  					textOut.text = "You break the window with the chair.";
-					Root.assets.playSound("glassBreak");
-					windowOpen = true;
-  					rootSprite.removeChild(window);
-  					rootSprite.addChild(brokenWindow);
-  					rootSprite.addChild(brokenGlass);
-  				}
-  			}
-  		}
+        // chair statements, needs interactivity
+        if (textField.text == "Stand on chair" || textField.text == "stand on chair" || textField.text == "Stand on the chair" || textField.text == "stand on the chair") {
+            if (userStandingOnChair == true) {
+                textOut.text = "you are already standing on the chair";
+            } else {
+                if (holdingChair == true) {
+                    textOut.text = "there is no chair to stand on.";
+                } else {
+                    textOut.text = "you stood on the chair";
+                    userStandingOnChair = true;
+                    rootSprite.removeChild(avatar);
+                    rootSprite.removeChild(chair);
+                    rootSprite.addChild(avatarStandingOnChair);
+                }
+            }
+        }
 
-  		if(textField.text == "Crawl out window" || textField.text == "crawl out window" || textField.text == "go out window" || textField.text == "escape through window"){
-  			if(windowOpen == true){
-				if(holdingSheet == true){
-					removeChildren();
-					rootSprite.addChild(winSheet);
-					Root.assets.playSound("youWin");
-					if (textField.text == "Play" || textField.text == "play"){
-						removeChildren();
-						removeEventListeners();
-						start();
-					}
-				}
-				else{
-					removeChildren();
-					Root.assets.playSound("bgmusic");
-					rootSprite.addChild(gameOverWindow);
-					if (textField.text == "Play" || textField.text == "play"){
-						removeChildren();
-						removeEventListeners();
-						start();
-					}
-				}
-			}
-			else{
-			textOut.text = "The window is shut, you cannot crawl out.";
-  			}
-		}
+        if (textField.text == "get off chair" || textField.text == "Get off chair" || textField.text == "get down" || textField.text == "Get down" || textField.text == "step down" || textField.text == "Step down") {
+            if (userStandingOnChair == true) {
+                userStandingOnChair = false;
+                textOut.text = "you got off the chair";
+                rootSprite.removeChild(avatarStandingOnChair);
+                rootSprite.addChild(avatar);
+                rootSprite.addChild(chair);
+            }
+        }
 
-
-  		//glass statements
-  		if(textField.text == "Pick up glass" || textField.text == "pick up glass" || textField.text == "get glass" || textField.text == "pickup broken glass"
-  		 || textField.text == "pick up broken glass"){
-  		 	if(userSitting == true){
-  		 		textOut.text = "you cant, you are still sitting";
-  		 	}
-  		 	else{
-  		 		if(holdingGlass == true){
-  					textOut.text = "You already picked the glass up.";
-  			}
-  				else{
-  					textOut.text = "You pick up the broken glass.";
-  					playerInventory.add("Broken Glass");
-					rootSprite.addChild(miniGlass);
-  					rootSprite.removeChild(brokenGlass);
-  					holdingGlass = true;
-  				}
-  		 	}
-  		}
-  			if(textField.text == "Put down glass" || textField.text == "put down glass" || textField.text == "drop glass" || textField.text == "drop broken glass" 
-  				|| textField.text == "get rid of glass"){
-  				if(userSitting == true){
-  					textOut.text = "you cant, you are still sitting";
-  				}
-  				else{
-  					if(holdingGlass == true){
-  						textOut.text = "You put the broken glass back down on the floor.";
-  						playerInventory.remove("Broken Glass");
-						rootSprite.removeChild(miniGlass);
-  						holdingGlass = false;
-  						rootSprite.addChild(brokenGlass);
-  					}
-  					else{
-  						textOut.text = "You did not pick up the glass.";
-  					}
-  				}
-  			}	
-
-        	if(textField.text == "Cut bed" || textField.text == "cut bed" || textField.text == "cut bed with glass" || textField.text == "cut open bed" 
-        		|| textField.text == "cut mattress open" || textField.text == "cut mattress"){
-        		if(userSitting == true){
-        			textOut.text = "cant, still sitting";
-        		}
-        		else{
-        			if(holdingGlass == true){
-            			textOut.text = "You cut open the bed with the broken glass.";
-				Root.assets.playSound("ripping");
-            			rootSprite.removeChild(bed);
-            			// check if sheet is on bed
-				if(removedSheet == true){
-					rootSprite.addChild(cutBedNoSheet);
-				}
-				else{
-				rootSprite.addChild(cutBed);
-            			rootSprite.addChild(spring);
-				}
-				bedIsCut = true;
-          			}
-          			else{
-          				textOut.text = "you have nothing to cut the bed with";
-          			}
-        		}
-        	}
-		
-		
-		
-		// attic statements
-			
-			if(textField.text == "open attic" || textField.text == "Open attic" || textField.text == "open the attic" || textField.text == "Open the attic" || textField.text == "look in attic" || textField.text == "Look in attic"){
-				if(existsAttic == true){
-					if(userStandingOnChair == true){
-						if(holdingShovel == false){
-							textOut.text = "looking inside the attic. . .";
-							textOut.text = "you found a shovel!";
-							playerInventory.add("Shovel");
-							rootSprite.addChild(miniShovel);
-							holdingShovel = true;
-							rootSprite.removeChild(attic);
-							rootSprite.addChild(atticOpen);
-						}
-					}
-					else{
-						textOut.text = "you can't seem to reach the attic";
-					}
-				}
-			}
-			
-			if(textField.text == "dig a hole" || textField.text == "Dig a hole" || textField.text == "dig with shovel" || textField.text == "Dig with shovel" || textField.text == "dig with the shovel" || textField.text == "Dig with the shovel"){
-				if(holdingShovel == true){
-					removeChildren();
-					rootSprite.addChild(winShovel);
-					Root.assets.playSound("youWin");
-							
-					if (textField.text == "Play" || textField.text == "play"){
-						removeChildren();
-						removeEventListeners();
-						start();
-					}
-				}	
-			}
-
-  			// chair statements, needs interactivity
-			if(textField.text == "Stand on chair" || textField.text == "stand on chair" || textField.text == "Stand on the chair" || textField.text == "stand on the chair"){
-				if(userStandingOnChair == true){
-  					textOut.text = "you are already standing on the chair";
-  				}
-  				else{
-  					if(holdingChair == true){
-  						textOut.text = "there is no chair to stand on.";
-  					}
-  					else{
-  						textOut.text = "you stood on the chair";
-  						userStandingOnChair = true;
-  						rootSprite.removeChild(avatar);
-  						rootSprite.removeChild(chair);
-  						rootSprite.addChild(avatarStandingOnChair);
-  					}
-  				}
-			}
-			
-			if(textField.text == "get off chair" || textField.text == "Get off chair" || textField.text == "get down" || textField.text == "Get down" || textField.text == "step down" || textField.text == "Step down"){
-  				if(userStandingOnChair == true){
-  					userStandingOnChair = false;
-  					textOut.text = "you got off the chair";
-  					rootSprite.removeChild(avatarStandingOnChair);
-  					rootSprite.addChild(avatar);
-  					rootSprite.addChild(chair);
-  				}
-  			}
-			
-  			if(textField.text == "Sit on chair" || textField.text == "sit on chair" || textField.text == "sit"){
-  				if(userSitting == true){
-  					textOut.text = "you are already sitting in the chair";
-  				}
-  				else{
-  					if(holdingChair == true){
-  						textOut.text = "there is no chair to sit down on.";
-  					}
-  					else{
-  						textOut.text = "you sit down on the chair";
-  						userSitting = true;
-  						rootSprite.removeChild(avatar);
-  						rootSprite.removeChild(chair);
-  						rootSprite.addChild(avatarSitting);
-  					}
-  				}
-  			}
-  			if(textField.text == "Stand up" || textField.text == "stand up" || textField.text == "stand"|| textField.text == "get up" ){
-  				if(userSitting == true){
-  					userSitting = false;
-  					textOut.text = "you stand up";
-  					rootSprite.removeChild(avatarSitting);
-  					rootSprite.addChild(avatar);
-  					rootSprite.addChild(chair);
-  				}
-  				else{
-  					textOut.text = "you are already standing";
-  				}
-  			}
-
-			
-			
-			
-  			if(textField.text == "Pick up chair" || textField.text == "pick up chair" || textField.text == "grab chair" || textField.text == "pick up the chair"){
-  				// check to see if player is already holding the chair
-  				if(userSitting == true){
-  					textOut.text = "you are sitting in the chair";
-  				}
-  				else{
-  					if(holdingChair == true){
-  						textOut.text = "You are already holding the chair.";
-  					}
-  					else{
-  						textOut.text = "You pick up the chair.";
-  						playerInventory.add("Chair");
-						rootSprite.addChild(miniChair);
-  						rootSprite.removeChild(chair);
-  						holdingChair = true;
-  					}	
-  				}	
-  			}
-
-  			if(textField.text == "Put down chair" || textField.text == "put down chair" || textField.text == "set down chair" || textField.text == "drop chair" 
-  				|| textField.text == "get rid of chair"){
-  				if(holdingChair == true){
-  					textOut.text = "You set the chair down.";
-  					rootSprite.addChild(chair);
-  					playerInventory.remove("Chair");
-					rootSprite.removeChild(miniChair);
-  					holdingChair = false;
-  				}
-  				else{
-  					textOut.text = "You are not holding the chair.";
-  				}
-  			}
+        if (textField.text == "Sit on chair" || textField.text == "sit on chair" || textField.text == "sit") {
+            if (userSitting == true) {
+                textOut.text = "you are already sitting in the chair";
+            } else {
+                if (holdingChair == true) {
+                    textOut.text = "there is no chair to sit down on.";
+                } else {
+                    textOut.text = "you sit down on the chair";
+                    userSitting = true;
+                    rootSprite.removeChild(avatar);
+                    rootSprite.removeChild(chair);
+                    rootSprite.addChild(avatarSitting);
+                }
+            }
+        }
+        if (textField.text == "Stand up" || textField.text == "stand up" || textField.text == "stand" || textField.text == "get up") {
+            if (userSitting == true) {
+                userSitting = false;
+                textOut.text = "you stand up";
+                rootSprite.removeChild(avatarSitting);
+                rootSprite.addChild(avatar);
+                rootSprite.addChild(chair);
+            } else {
+                textOut.text = "you are already standing";
+            }
+        }
 
 
-  			// bed statements
-			
-			if(textField.text == "pick up sheet" || textField.text == "pick up sheets" || textField.text == "take sheet" || textField.text == "take sheets" || textField.text == "remove sheet" || textField.text == "remove sheets"){
-				if(holdingSheet == false){
-					holdingSheet = true;
-					removedSheet = true;
-					playerInventory.add("Sheet");
-					rootSprite.addChild(miniSheet);
-					textOut.text = "you pick up the sheet.";
-					// check if bed is cut
-					if(bedIsCut == true){
-						rootSprite.removeChild(cutBed);
-						rootSprite.addChild(cutBedNoSheet);
-					}
-					else{
-						rootSprite.removeChild(bed2);
-						rootSprite.addChild(bedNoSheet);
-					}
-				}
-			}
-  			
-			if(textField.text == "get in bed" || textField.text == "Get in bed" || textField.text == "lay down in bed" || textField.text == "Lay down in bed" || textField.text == "Lay down on bed" || textField.text == "lay down on bed" || textField.text == "go to bed" || textField.text == "Go to bed" || textField.text == "lay on bed" || textField.text == "lay in bed" || textField.text == "Lay in bed" || textField.text == "Lay on bed"){
-				// check to see if already laying down
-				if(userSleeping == true || userStandingOnChair == true || userSitting == true){
-					textOut.text = "you can't do that it that position";
-				}
-				// check to see if the bed is cut
-				else{
-					if(bedIsCut == true){
-						if(holdingGlass == true){
-							removeChildren();
-							Root.assets.playSound("bgmusic");
-							// check to see if the sheet is on bed
-							if(removedSheet == true){
-								rootSprite.addChild(gameOverGlassWSpringNoSheet);
-							}
-							else{
-							rootSprite.addChild(gameOverGlassWSpring);
-							}
-							if (textField.text == "Play" || textField.text == "play"){
-								removeChildren();
-								removeEventListeners();
-								start();
-							}
-						}
-						else{
-							textOut.text = "you laid down";
-							rootSprite.removeChild(avatar);
-							rootSprite.removeChild(bed2);
-							// check if sheet is on bed
-							if(removedSheet == true){
-								rootSprite.addChild(sleepingCutBedNoSheet);
-							}
-							else{
-							rootSprite.addChild(sleepingCutBed);
-							}
-							userSleeping = true;
-						}
-					}
-					else{
-						if(holdingGlass == true){
-							removeChildren();
-							// check if sheet on bed
-							Root.assets.playSound("bgmusic");
-							if(removedSheet == true){
-								rootSprite.addChild(gameOverGlassNoSheet);
-							}
-							else{
-							rootSprite.addChild(gameOverGlass);
-							}
-							if (textField.text == "Play" || textField.text == "play"){
-								removeChildren();
-								removeEventListeners();
-								start();
-							}
-						}
-						else{
-							textOut.text = "you laid down";
-							rootSprite.removeChild(avatar);
-							rootSprite.removeChild(bed2);
-							// check if sheet on bed
-							if(removedSheet == true){
-								rootSprite.addChild(sleepingBedNoSheet);
-							}
-							else{
-							rootSprite.addChild(sleepingBed);
-							}
-							userSleeping = true;
-						}
-					}
-				}
-			}
-			
-			if(textField.text == "get up" || textField.text == "Get up" || textField.text == "wake up" || textField.text == "Wake up" || textField.text == "get out of bed" || textField.text == "Get out of bed" ){
-				// check to see if user is sleeping
-				if(userSleeping == true){
-					textOut.text = "you woke up...";
-					textOut.text = "you noticed the attic on the ceiling while laying down!";
-					rootSprite.addChild(attic);
-					existsAttic = true;
-					userSleeping = false;
-					// check if the bed is cut or not
-					if(bedIsCut == true){
-						rootSprite.removeChild(sleepingCutBed);
-						// check if sheet on bed
-						if(removedSheet == true){
-							rootSprite.addChild(cutBedNoSheet);
-						}
-						else{
-						rootSprite.addChild(cutBed);
-						}
-						rootSprite.addChild(avatar);
-					}
-					else{
-						rootSprite.removeChild(sleepingBed);
-						// check if sheet on bed
-						if(removedSheet == true){
-							rootSprite.addChild(bedNoSheet);
-						}
-						else{
-						rootSprite.addChild(bed2);
-						}
-						rootSprite.addChild(avatar);
-					}
-				}
-			}
-			
-			if(textField.text == "pick up spring" || textField.text == "get spring" || textField.text == "grab spring"){
-  				if(holdingSpring == true){
-  					textOut.text = "you already are holding spring";
-  				}
-  				else{
-  					textOut.text = "you pickup a spring";
-  					playerInventory.add("Spring");
-					rootSprite.addChild(miniSpring);
-  					rootSprite.removeChild(spring);
-  					holdingSpring = true;
-  				}
-  				textOut.text = "You sit down on the chair.";
-  			}
 
-  			//computer statements
-  			if(textField.text =="use computer"){
-  				if(userSitting == true){
-  					textOut.text = "You turn on the computer...";
-  					// go to computer terminal screen here
-  				}
-  				else{
-  					textOut.text = "you cant use the computer while standing";
-  				}
-  			}
 
+        if (textField.text == "Pick up chair" || textField.text == "pick up chair" || textField.text == "grab chair" || textField.text == "pick up the chair") {
+            // check to see if player is already holding the chair
+            if (userSitting == true) {
+                textOut.text = "you are sitting in the chair";
+            } else {
+                if (holdingChair == true) {
+                    textOut.text = "You are already holding the chair.";
+                } else {
+                    textOut.text = "You pick up the chair.";
+                    playerInventory.add("Chair");
+                    rootSprite.addChild(miniChair);
+                    rootSprite.removeChild(chair);
+                    holdingChair = true;
+                }
+            }
+        }
+
+        if (textField.text == "Put down chair" || textField.text == "put down chair" || textField.text == "set down chair" || textField.text == "drop chair" || textField.text == "get rid of chair") {
+            if (holdingChair == true) {
+                textOut.text = "You set the chair down.";
+                rootSprite.addChild(chair);
+                playerInventory.remove("Chair");
+                rootSprite.removeChild(miniChair);
+                holdingChair = false;
+            } else {
+                textOut.text = "You are not holding the chair.";
+            }
+        }
+
+
+        // bed statements
+
+        if (textField.text == "pick up sheet" || textField.text == "pick up sheets" || textField.text == "take sheet" || textField.text == "take sheets" || textField.text == "remove sheet" || textField.text == "remove sheets") {
+            if (holdingSheet == false) {
+                holdingSheet = true;
+                removedSheet = true;
+                playerInventory.add("Sheet");
+                rootSprite.addChild(miniSheet);
+                textOut.text = "you pick up the sheet.";
+                // check if bed is cut
+                if (bedIsCut == true) {
+                    rootSprite.removeChild(cutBed);
+                    rootSprite.addChild(cutBedNoSheet);
+                } else {
+                    rootSprite.removeChild(bed2);
+                    rootSprite.addChild(bedNoSheet);
+                }
+            }
+        }
+
+        if (textField.text == "get in bed" || textField.text == "Get in bed" || textField.text == "lay down in bed" || textField.text == "Lay down in bed" || textField.text == "Lay down on bed" || textField.text == "lay down on bed" || textField.text == "go to bed" || textField.text == "Go to bed" || textField.text == "lay on bed" || textField.text == "lay in bed" || textField.text == "Lay in bed" || textField.text == "Lay on bed") {
+            // check to see if already laying down
+            if (userSleeping == true || userStandingOnChair == true || userSitting == true) {
+                textOut.text = "you can't do that it that position";
+            }
+            // check to see if the bed is cut
+            else {
+                if (bedIsCut == true) {
+                    if (holdingGlass == true) {
+                        removeChildren();
+                        Root.assets.playSound("bgmusic");
+                        // check to see if the sheet is on bed
+                        if (removedSheet == true) {
+                            rootSprite.addChild(gameOverGlassWSpringNoSheet);
+                        } else {
+                            rootSprite.addChild(gameOverGlassWSpring);
+                        }
+                        textOut.text = "";
+                        gameComplete = true;
+                    } else {
+                        textOut.text = "you laid down";
+                        rootSprite.removeChild(avatar);
+                        rootSprite.removeChild(bed2);
+                        // check if sheet is on bed
+                        if (removedSheet == true) {
+                            rootSprite.addChild(sleepingCutBedNoSheet);
+                        } else {
+                            rootSprite.addChild(sleepingCutBed);
+                        }
+                        userSleeping = true;
+                    }
+                } else {
+                    if (holdingGlass == true) {
+                        removeChildren();
+                        // check if sheet on bed
+                        Root.assets.playSound("bgmusic");
+                        if (removedSheet == true) {
+                            rootSprite.addChild(gameOverGlassNoSheet);
+                        } else {
+                            rootSprite.addChild(gameOverGlass);
+                        }
+                        textOut.text = "";
+                        gameComplete = true;
+                    } else {
+                        textOut.text = "you laid down";
+                        rootSprite.removeChild(avatar);
+                        rootSprite.removeChild(bed2);
+                        // check if sheet on bed
+                        if (removedSheet == true) {
+                            rootSprite.addChild(sleepingBedNoSheet);
+                        } else {
+                            rootSprite.addChild(sleepingBed);
+                        }
+                        userSleeping = true;
+                    }
+                }
+            }
+        }
+
+        if (textField.text == "get up" || textField.text == "Get up" || textField.text == "wake up" || textField.text == "Wake up" || textField.text == "get out of bed" || textField.text == "Get out of bed") {
+            // check to see if user is sleeping
+            if (userSleeping == true) {
+                textOut.text = "you woke up...";
+                textOut.text = "you noticed the attic on the ceiling while laying down!";
+                rootSprite.addChild(attic);
+                existsAttic = true;
+                userSleeping = false;
+                // check if the bed is cut or not
+                if (bedIsCut == true) {
+                    rootSprite.removeChild(sleepingCutBed);
+                    // check if sheet on bed
+                    if (removedSheet == true) {
+                        rootSprite.addChild(cutBedNoSheet);
+                    } else {
+                        rootSprite.addChild(cutBed);
+                    }
+                    rootSprite.addChild(avatar);
+                } else {
+                    rootSprite.removeChild(sleepingBed);
+                    // check if sheet on bed
+                    if (removedSheet == true) {
+                        rootSprite.addChild(bedNoSheet);
+                    } else {
+                        rootSprite.addChild(bed2);
+                    }
+                    rootSprite.addChild(avatar);
+                }
+            }
+        }
+
+        if (textField.text == "pick up spring" || textField.text == "get spring" || textField.text == "grab spring") {
+            if (holdingSpring == true) {
+                textOut.text = "you already are holding spring";
+            } else {
+                textOut.text = "you pickup a spring";
+                playerInventory.add("Spring");
+                rootSprite.addChild(miniSpring);
+                rootSprite.removeChild(spring);
+                holdingSpring = true;
+            }
+            textOut.text = "You sit down on the chair.";
+        }
+
+        //computer statements
+        if (textField.text == "use computer") {
+            if (userSitting == true) {
+                textOut.text = "You turn on the computer...";
+                // go to computer terminal screen here
+            } else {
+                textOut.text = "you cant use the computer while standing";
+            }
+        }
+        if (gameComplete) {
+            if (textField.text == "Play" || textField.text == "play") {
+                gameComplete = false;
+                holdingChair = false;
+                holdingGlass = false;
+                holdingSpring = false;
+                holdingShovel = false;
+                holdingSheet = false;
+                doorLocked = true;
+                windowOpen = false;
+                userSitting = false;
+                bedIsCut = false;
+                userSleeping = false;
+                userStandingOnChair = false;
+                existsAttic = false;
+                removedSheet = false;
+                removeChildren();
+                removeEventListeners();
+                start();
+            }
+        }
   			// clear console text
   			textField.text = "";
-
-            // TODO Set focus to textField
-            //stage.focus = textField;
-            //textField.setSelection(textField.text.length, textField.text.length);
-
-  			//textOut.text = "Inventory: " + playerInventory;
 		}
 	}
 }
