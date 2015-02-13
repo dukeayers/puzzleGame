@@ -47,6 +47,7 @@ class Credits extends Sprite{
 		textField.backgroundColor = 0x433C3C;
 		textField.width = 700;
 		Starling.current.nativeOverlay.addChild(textField);
+    	textField.stage.focus = textField;
 
 		textField.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 
@@ -59,9 +60,6 @@ class Credits extends Sprite{
 				removeChildren();
 				var game = new Game(rootSprite);
 				game.start();
-			}
-			else{
-				trace("Nope");
 			}
 		}
 

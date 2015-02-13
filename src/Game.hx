@@ -12,6 +12,7 @@ import flash.text.TextFieldType;
 import flash.text.TextFormatAlign;
 import flash.events.*;
 import flash.text.*;
+import flash.display.FocusDirection;
 import flash.media.SoundChannel;
 
 //These imports are for setting the textField focus
@@ -289,6 +290,7 @@ public var playerInventory = new List<String>();
 		textField.width = 700;
 
 		Starling.current.nativeOverlay.addChild(textField);
+    textField.stage.focus = textField;
 
     //Trying to set the focus... again.
     //Starling.setFocus("textField");
@@ -315,7 +317,6 @@ public var playerInventory = new List<String>();
     textOut.x = 0;
     textOut.y = 0;
     Starling.current.nativeOverlay.addChild(textOut);
-
 
 		textField.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 
