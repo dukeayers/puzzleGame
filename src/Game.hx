@@ -132,16 +132,16 @@ public var playerInventory = new List<String>();
 		atticOpen.y = 60;
 		
 		miniChair = new Image(Root.assets.getTexture("miniChair"));
-                miniChair.x = 480;
-                miniChair.y = 10;
+    miniChair.x = 480;
+    miniChair.y = 10;
 
-                miniGlass = new Image(Root.assets.getTexture("miniGlass"));
-                miniGlass.x = 530;
-                miniGlass.y = 10;
+    miniGlass = new Image(Root.assets.getTexture("miniGlass"));
+    miniGlass.x = 530;
+    miniGlass.y = 10;
 
-                miniSpring = new Image(Root.assets.getTexture("miniSpring"));
-                miniSpring.x = 580;
-                miniSpring.y = 10;
+    miniSpring = new Image(Root.assets.getTexture("miniSpring"));
+    miniSpring.x = 580;
+    miniSpring.y = 10;
 		
 		miniShovel = new Image(Root.assets.getTexture("miniShovel"));
 		miniShovel.x = 630;
@@ -164,52 +164,52 @@ public var playerInventory = new List<String>();
 		brokenGlass.y = 250;
 
 
-    	cutBed = new Image(Root.assets.getTexture("cutBed"));
-    	cutBed.x = 150;
-    	cutBed.y = 145;
+    cutBed = new Image(Root.assets.getTexture("cutBed"));
+    cutBed.x = 150;
+    cutBed.y = 145;
 
-      bed2 = new Image(Root.assets.getTexture("bed"));
-      bed2.x = 150;
-      bed2.y = 145;
-      rootSprite.addChild(bed2);
+    bed2 = new Image(Root.assets.getTexture("bed"));
+    bed2.x = 150;
+    bed2.y = 145;
+    rootSprite.addChild(bed2);
       
-      sleepingBed = new Image(Root.assets.getTexture("sleepingBed"));
-      sleepingBed.x = 150;
-      sleepingBed.y = 145;
+    sleepingBed = new Image(Root.assets.getTexture("sleepingBed"));
+    sleepingBed.x = 150;
+    sleepingBed.y = 145;
       
-      sleepingCutBed = new Image(Root.assets.getTexture("sleepingCutBed"));
-      sleepingCutBed.x = 150;
-      sleepingCutBed.y = 145;
+    sleepingCutBed = new Image(Root.assets.getTexture("sleepingCutBed"));
+    sleepingCutBed.x = 150;
+    sleepingCutBed.y = 145;
 
-    	spring = new Image(Root.assets.getTexture("spring"));
-    	spring.x = 335;
-    	spring.y = 375;
+    spring = new Image(Root.assets.getTexture("spring"));
+    spring.x = 335;
+    spring.y = 375;
 
-    	avatarSitting = new Image(Root.assets.getTexture("avatarSitting"));
-    	avatarSitting.x = 675;
-    	avatarSitting.y = 175;
+    avatarSitting = new Image(Root.assets.getTexture("avatarSitting"));
+    avatarSitting.x = 675;
+    avatarSitting.y = 175;
 
 
-    	avatar = new Image(Root.assets.getTexture("avatarNormal"));
-    	avatar.x = 575;
-    	avatar.y = 220;
-    	rootSprite.addChild(avatar);
+    avatar = new Image(Root.assets.getTexture("avatarNormal"));
+    avatar.x = 575;
+    avatar.y = 220;
+    rootSprite.addChild(avatar);
 
-      winScreen = new Image(Root.assets.getTexture("winScreen"));
-      winScreen.x = 0;
-      winScreen.y = 0;
+    winScreen = new Image(Root.assets.getTexture("winScreen"));
+    winScreen.x = 0;
+    winScreen.y = 0;
       
-      winShovel = new Image(Root.assets.getTexture("winShovel"));
-	winShovel.x = 0;
-	winShovel.y = 0;
+    winShovel = new Image(Root.assets.getTexture("winShovel"));
+	  winShovel.x = 0;
+	  winShovel.y = 0;
 	
-	gameOverGlass = new Image(Root.assets.getTexture("gameOverGlass"));
-	gameOverGlass.x = 0;
-	gameOverGlass.y = 0;
+	  gameOverGlass = new Image(Root.assets.getTexture("gameOverGlass"));
+	  gameOverGlass.x = 0;
+	  gameOverGlass.y = 0;
 	
-	gameOverGlassWSpring = new Image(Root.assets.getTexture("gameOverGlassWSpring"));
-	gameOverGlassWSpring.x = 0;
-	gameOverGlassWSpring.y = 0;
+	  gameOverGlassWSpring = new Image(Root.assets.getTexture("gameOverGlassWSpring"));
+	  gameOverGlassWSpring.x = 0;
+	  gameOverGlassWSpring.y = 0;
 
 		//Set Textfield to be used as a terminal
 		textField = new flash.text.TextField();
@@ -234,16 +234,16 @@ public var playerInventory = new List<String>();
         //Starling.setFocus("textField");
 
         //This is for outputting text
-        textOut = new flash.text.TextField();
-        textOutFormat = new TextFormat("Arial", 18, 0xffffff);
-        textOutFormat.align = TextFormatAlign.LEFT;
-        textOut.defaultTextFormat = textOutFormat;
-        textOut.background = true;
-        textOut.backgroundColor = 0x50826e;
-        textOut.width = 700;
-        textOut.x = 0;
-        textOut.y = 520;
-        Starling.current.nativeOverlay.addChild(textField);
+    textOut = new flash.text.TextField();
+    textOutFormat = new TextFormat("Arial", 18, 0xffffff);
+    textOutFormat.align = TextFormatAlign.LEFT;
+    textOut.defaultTextFormat = textOutFormat;
+    textOut.background = true;
+    textOut.backgroundColor = 0x50826e;
+    textOut.width = 700;
+    textOut.x = 0;
+    textOut.y = 520;
+    Starling.current.nativeOverlay.addChild(textField);
 
 		textField.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 
