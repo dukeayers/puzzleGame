@@ -45,11 +45,16 @@ public var miniGlass:Image;
 public var miniChair:Image;
 public var miniSpring:Image;
 public var miniShovel:Image;
+public var sleepingBed:Image;
+public var sleepingCutBed:Image;
 public var bed2:Image;
 public var spring:Image;
 public var winScreen:Image;
+public var winShovel:Image;
 public var attic:Image;
 public var atticOpen:Image;
+public var gameOverGlass:Image;
+public var gameOverGlassWSpring:Image;
 
 
 private var textField:TextField; 
@@ -127,15 +132,15 @@ public var playerInventory = new List<String>();
 		
 		miniChair = new Image(Root.assets.getTexture("miniChair"));
                 miniChair.x = 480;
-                miniChair.y = 58;
+                miniChair.y = 10;
 
                 miniGlass = new Image(Root.assets.getTexture("miniGlass"));
                 miniGlass.x = 530;
-                miniGlass.y = 58;
+                miniGlass.y = 10;
 
                 miniSpring = new Image(Root.assets.getTexture("miniSpring"));
                 miniSpring.x = 580;
-                miniSpring.y = 58;
+                miniSpring.y = 10;
 		
 		miniShovel = new Image(Root.assets.getTexture("miniShovel"));
 		miniShovel.x = 630;
@@ -166,6 +171,14 @@ public var playerInventory = new List<String>();
       bed2.x = 150;
       bed2.y = 145;
       rootSprite.addChild(bed2);
+      
+      sleepingBed = new Image(Root.assets.getTexture("sleepingBed"));
+      sleepingBed.x = 150;
+      sleepingBed.y = 145;
+      
+      sleepingCutBed = new Image(Root.assets.getTexture("sleepingCutBed"));
+      sleepingCutBed.x = 150;
+      sleepingCutBed.y = 145;
 
     	spring = new Image(Root.assets.getTexture("spring"));
     	spring.x = 335;
@@ -184,7 +197,18 @@ public var playerInventory = new List<String>();
       winScreen = new Image(Root.assets.getTexture("winScreen"));
       winScreen.x = 0;
       winScreen.y = 0;
-
+      
+      winShovel = new Image(Root.assets.getTexture("winShovel"));
+	winShovel.x = 0;
+	winShovel.y = 0;
+	
+	gameOverGlass = new Image(Root.assets.getTexture("gameOverGlass"));
+	gameOverGlass.x = 0;
+	gameOverGlass.y = 0;
+	
+	gameOverGlassWSpring = new Image(Root.assets.getTexture("gameOverGlassWSpring"));
+	gameOverGlassWSpring.x = 0;
+	gameOverGlassWSpring.y = 0;
 
 		//Set Textfield to be used as a terminal
 		textField = new flash.text.TextField();
