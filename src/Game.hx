@@ -37,6 +37,7 @@ public var computer:Image;
 public var brokenGlass:Image;
 public var avatar:Image;
 public var avatarSitting:Image;
+public var avatarStandingOnChair:Image;
 public var table:Image;
 public var bed:Image;
 public var cutBed:Image;
@@ -60,6 +61,7 @@ public var holdingSpring:Bool = false;
 public var doorLocked:Bool = true;
 public var userSitting:Bool = false;
 public var userSleeping:Bool = false;
+public var userStandingOnChair:Bool = false;
 
 public var playerInventory = new List<String>();
 
@@ -101,6 +103,10 @@ public var playerInventory = new List<String>();
 		chair.x = 700;
 		chair.y = 300;
 		rootSprite.addChild(chair);
+		
+		avatarStandingOnChair = new Image(Root.assets.getTexture("avatarStandingOnChair"));
+		avatarStandingOnChair.x = 679;
+		avatarStandingOnChair.y = 34;
 
 		brokenWindow = new Image(Root.assets.getTexture("brokenWindow"));
 		brokenWindow.x = 100;
@@ -405,6 +411,34 @@ public var playerInventory = new List<String>();
 
 
   			// chair statements, needs interactivity
+			if(textField.text == "Stand on chair" || textField.text == "stand on chair" || textField.text == "Stand on the chair" || textField.text == "stand on the chair"){
+				if(userStandingOnChair == true){
+  					trace("you are already standing on the chair");
+  				}
+  				else{
+  					if(holdingChair == true){
+  						trace("there is no chair to stand on.");
+  					}
+  					else{
+  						trace("you stood on the chair");
+  						userStandingOnChair = true;
+  						rootSprite.removeChild(avatar);
+  						rootSprite.removeChild(chair);
+  						rootSprite.addChild(avatarStandingOnChair);
+  					}
+  				}
+			}
+			
+			if(textField.text == "get off chair" || textField.text == "Get off chair" || textField.text == "get down" || textField.text == "Get down" || textField.text == "step down" || textField.text == "Step down"){
+  				if(userStandingOnChair == true){
+  					userStandingOnChair = false;
+  					trace("you got off the chair");
+  					rootSprite.removeChild(avatarStandingOnChair);
+  					rootSprite.addChild(avatar);
+  					rootSprite.addChild(chair);
+  				}
+  			}
+			
   			if(textField.text == "Sit on chair" || textField.text == "sit on chair" || textField.text == "sit"){
   				if(userSitting == true){
   					trace("you are already sitting in the chair");
