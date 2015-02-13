@@ -283,6 +283,7 @@ public var playerInventory = new List<String>();
   				else{
   					textOut.text = "The door opens, YOU WIN!!!";
   					// win the game, win screen here
+                    textOut.text = "";
                     rootSprite.addChild(winScreen);
                     if (textField.text == "Play" || textField.text == "play")
                     {
@@ -312,6 +313,7 @@ public var playerInventory = new List<String>();
   				else{
   					textOut.text = "The door opens, YOU WIN!!!";
   					// win the game, win screen here
+                    textOut.text = "";
                     rootSprite.addChild(winScreen);
                     if (textField.text == "Play" || textField.text == "play")
                     {
@@ -335,6 +337,7 @@ public var playerInventory = new List<String>();
   				else{
   					textOut.text = "The door opens, YOU WIN!!!";
   					// win the game, win screen here
+                    textOut.text = "";
                     rootSprite.addChild(winScreen);
                     if (textField.text == "Play" || textField.text == "play")
                     {
