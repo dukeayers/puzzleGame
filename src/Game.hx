@@ -231,20 +231,20 @@ public var playerInventory = new List<String>();
 
 		Starling.current.nativeOverlay.addChild(textField);
 
-        //Trying to set the focus... again.
-        //Starling.setFocus("textField");
+    //Trying to set the focus... again.
+    //Starling.setFocus("textField");
 
-        //This is for outputting text
-        textOut = new flash.text.TextField();
-        textOutFormat = new TextFormat("Arial", 18, 0x000000);
-        textOutFormat.align = TextFormatAlign.LEFT;
-        textOut.defaultTextFormat = textOutFormat;
-        textOut.background = true;
-        textOut.backgroundColor = 0xfdffef;
-        textOut.width = 400;
-        textOut.x = 0;
-        textOut.y = 0;
-        Starling.current.nativeOverlay.addChild(textOut);
+    //This is for outputting text
+    textOut = new flash.text.TextField();
+    textOutFormat = new TextFormat("Arial", 18, 0x000000);
+    textOutFormat.align = TextFormatAlign.LEFT;
+    textOut.defaultTextFormat = textOutFormat;
+    textOut.background = true;
+    textOut.backgroundColor = 0xfdffef;
+    textOut.width = 400;
+    textOut.x = 0;
+    textOut.y = 0;
+    Starling.current.nativeOverlay.addChild(textOut);
 
     textOut = new flash.text.TextField();
     textOutFormat = new TextFormat("Arial", 18, 0x000000);
@@ -252,7 +252,7 @@ public var playerInventory = new List<String>();
     textOut.defaultTextFormat = textOutFormat;
     textOut.background = true;
     textOut.backgroundColor = 0xfdffef;
-    textOut.width = 700;
+    textOut.width = 400;
     textOut.x = 0;
     textOut.y = 0;
     Starling.current.nativeOverlay.addChild(textOut);
