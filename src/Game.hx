@@ -69,7 +69,7 @@ public var holdingSpring:Bool = false;
 public var holdingShovel:Bool = false;
 public var doorLocked:Bool = true;
 public var userSitting:Bool = false;
-public var bedIsCut:Bool = true;
+public var bedIsCut:Bool = false;
 public var userSleeping:Bool = false;
 public var userStandingOnChair:Bool = false;
 public var existsAttic:Bool = false;
@@ -125,27 +125,27 @@ public var playerInventory = new List<String>();
 		
 		attic = new Image(Root.assets.getTexture("attic"));
 		attic.x = 700;
-		attic.y = 60;
+		attic.y = 53;
 		
 		atticOpen = new Image(Root.assets.getTexture("atticOpen"));
 		atticOpen.x = 700;
-		atticOpen.y = 60;
+		atticOpen.y = 53;
 		
 		miniChair = new Image(Root.assets.getTexture("miniChair"));
                 miniChair.x = 480;
-                miniChair.y = 10;
+                miniChair.y = 5;
 
                 miniGlass = new Image(Root.assets.getTexture("miniGlass"));
                 miniGlass.x = 530;
-                miniGlass.y = 10;
+                miniGlass.y = 5;
 
                 miniSpring = new Image(Root.assets.getTexture("miniSpring"));
                 miniSpring.x = 580;
-                miniSpring.y = 10;
+                miniSpring.y = 5;
 		
 		miniShovel = new Image(Root.assets.getTexture("miniShovel"));
 		miniShovel.x = 630;
-		miniShovel.y = 10;
+		miniShovel.y = 5;
 
    	table = new Image(Root.assets.getTexture("table"));
   	table.x = 800;
@@ -443,6 +443,7 @@ public var playerInventory = new List<String>();
             			trace("You cut open the bed with the broken glass.");
             			rootSprite.removeChild(bed);
             			rootSprite.addChild(cutBed);
+				bedIsCut = true;
             			rootSprite.addChild(spring);
           			}
           			else{
@@ -476,6 +477,7 @@ public var playerInventory = new List<String>();
 			
 			if(textField.text == "dig a hole" || textField.text == "Dig a hole" || textField.text == "dig with shovel" || textField.text == "Dig with shovel" || textField.text == "dig with the shovel" || textField.text == "Dig with the shovel"){
 				if(holdingShovel == true){
+					removeChildren();
 					rootSprite.addChild(winShovel);
 							
 					if (textField.text == "Play" || textField.text == "play"){
@@ -584,7 +586,7 @@ public var playerInventory = new List<String>();
 
   			// bed statements
   			
-			if(textField.text == "get in bed" || textField.text == "Get in bed" || textField.text == "lay down in bed" || textField.text == "Lay down in bed" || textField.text == "go to bed" || textField.text == "Go to bed" || textField.text == "lay on bed" || textField.text == "Lay on bed"){
+			if(textField.text == "get in bed" || textField.text == "Get in bed" || textField.text == "lay down in bed" || textField.text == "Lay down in bed" || textField.text == "Lay down on bed" || textField.text == "lay down on bed" || textField.text == "go to bed" || textField.text == "Go to bed" || textField.text == "lay on bed" || textField.text == "lay in bed" || textField.text == "Lay in bed" || textField.text == "Lay on bed"){
 				// check to see if already laying down
 				if(userSleeping == true || userStandingOnChair == true || userSitting == true){
 					trace("you can't do that it that position");
@@ -593,6 +595,7 @@ public var playerInventory = new List<String>();
 				else{
 					if(bedIsCut == true){
 						if(holdingGlass == true){
+							removeChildren();
 							rootSprite.addChild(gameOverGlassWSpring);
 							
 							if (textField.text == "Play" || textField.text == "play"){
@@ -605,13 +608,14 @@ public var playerInventory = new List<String>();
 							trace("you laid down");
 							rootSprite.removeChild(avatar);
 							rootSprite.removeChild(bed);
-							rootSprite.addChild(sleepingBed);
+							rootSprite.addChild(sleepingCutBed);
 							userSleeping = true;
 						}
 					}
 					else{
 						if(holdingGlass == true){
-							rootSprite.addChild(gameOverGlassWSpring);
+							removeChildren();
+							rootSprite.addChild(gameOverGlass);
 							
 							if (textField.text == "Play" || textField.text == "play"){
 								removeChildren();
@@ -622,7 +626,7 @@ public var playerInventory = new List<String>();
 						else{
 							trace("you laid down");
 							rootSprite.removeChild(avatar);
-							rootSprite.removeChild(bed);
+							rootSprite.removeChild(bed2);
 							rootSprite.addChild(sleepingBed);
 							userSleeping = true;
 						}
@@ -646,7 +650,7 @@ public var playerInventory = new List<String>();
 					}
 					else{
 						rootSprite.removeChild(sleepingBed);
-						rootSprite.addChild(bed);
+						rootSprite.addChild(bed2);
 						rootSprite.addChild(avatar);
 					}
 				}
