@@ -44,9 +44,12 @@ public var cutBed:Image;
 public var miniGlass:Image;
 public var miniChair:Image;
 public var miniSpring:Image;
+public var miniShovel:Image;
 public var bed2:Image;
 public var spring:Image;
 public var winScreen:Image;
+public var attic:Image;
+public var atticOpen:Image;
 
 
 private var textField:TextField; 
@@ -58,10 +61,12 @@ private var quadBack:Quad;
 public var holdingChair:Bool = false;
 public var holdingGlass:Bool = false;
 public var holdingSpring:Bool = false;
+public var holdingShovel:Bool = false;
 public var doorLocked:Bool = true;
 public var userSitting:Bool = false;
 public var userSleeping:Bool = false;
 public var userStandingOnChair:Bool = false;
+public var existsAttic:Bool = false;
 
 public var playerInventory = new List<String>();
 
@@ -112,6 +117,14 @@ public var playerInventory = new List<String>();
 		brokenWindow.x = 100;
 		brokenWindow.y = 200;
 		
+		attic = new Image(Root.assets.getTexture("attic"));
+		attic.x = 700;
+		attic.y = 60;
+		
+		atticOpen = new Image(Root.assets.getTexture("atticOpen"));
+		atticOpen.x = 700;
+		atticOpen.y = 60;
+		
 		miniChair = new Image(Root.assets.getTexture("miniChair"));
                 miniChair.x = 480;
                 miniChair.y = 58;
@@ -123,6 +136,10 @@ public var playerInventory = new List<String>();
                 miniSpring = new Image(Root.assets.getTexture("miniSpring"));
                 miniSpring.x = 580;
                 miniSpring.y = 58;
+		
+		miniShovel = new Image(Root.assets.getTexture("miniShovel"));
+		miniShovel.x = 630;
+		miniShovel.y = 10;
 
    	table = new Image(Root.assets.getTexture("table"));
   	table.x = 800;
@@ -408,7 +425,26 @@ public var playerInventory = new List<String>();
           			}
         		}
         	}
-
+		
+			//attic statements
+			if(textField.text == "open attic" || textField.text == "Open attic" || textField.text == "open the attic" || textField.text == "Open the attic" || textField.text == "look in attic" || textField.text == "Look in attic"){
+				if(existsAttic == true){
+					if(userStandingOnChair == true){
+						if(holdingShovel == false){
+							trace("looking inside the attic. . .");
+							trace("you found a shovel!");
+							playerInventory.add("Shovel");
+							rootSprite.addChild(miniShovel);
+							holdingShovel = true;
+							rootSprite.removeChild(attic);
+							rootSprite.addChild(atticOpen);
+						}
+					}
+					else{
+						trace("you can't seem to reach the attic");
+					}
+				}
+			}
 
   			// chair statements, needs interactivity
 			if(textField.text == "Stand on chair" || textField.text == "stand on chair" || textField.text == "Stand on the chair" || textField.text == "stand on the chair"){
