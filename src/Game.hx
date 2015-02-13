@@ -11,6 +11,7 @@ import flash.text.TextFieldAutoSize;
 import flash.text.TextFieldType;
 import flash.text.TextFormatAlign;
 import flash.events.*;
+import flash.media.SoundChannel;
 
 //These imports are for setting the textField focus
 //import flash.text.Stage;
@@ -56,6 +57,20 @@ public var atticOpen:Image;
 public var gameOverGlass:Image;
 public var gameOverGlassWSpring:Image;
 
+public var doorOpen:SoundChannel;
+public var bgmusic:SoundChannel;
+public var ripping:SoundChannel;
+public var glassBreak:SoundChannel;
+
+public var bedNoSheet:Image;
+public var cutBedNoSheet:Image;
+public var gameOverGlassNoSheet:Image;
+public var gameOverGlassWSpringNoSheet:Image;
+public var gameOverWindow:Image;
+public var miniSheet:Image;
+public var sleepingBedNoSheet:Image;
+public var sleepingCutBedNoSheet:Image;
+public var winSheet:Image;
 
 private var textField:TextField; 
 private var textFormat:TextFormat;
@@ -67,12 +82,15 @@ public var holdingChair:Bool = false;
 public var holdingGlass:Bool = false;
 public var holdingSpring:Bool = false;
 public var holdingShovel:Bool = false;
+public var holdingSheet:Bool = false;
 public var doorLocked:Bool = true;
+public var windowOpen:Bool = false;
 public var userSitting:Bool = false;
 public var bedIsCut:Bool = false;
 public var userSleeping:Bool = false;
 public var userStandingOnChair:Bool = false;
 public var existsAttic:Bool = false;
+public var removedSheet:Bool = false;
 
 
 public var playerInventory = new List<String>();
@@ -143,10 +161,16 @@ public var playerInventory = new List<String>();
     miniSpring = new Image(Root.assets.getTexture("miniSpring"));
     miniSpring.x = 580;
     miniSpring.y = 5;
+    
 		
 		miniShovel = new Image(Root.assets.getTexture("miniShovel"));
 		miniShovel.x = 630;
 		miniShovel.y = 5;
+		
+    miniSheet = new Image(Root.assets.getTexture("miniSheet"));
+    miniSheet.x = 680;
+    miniSheet.y = 5;
+    
 
    	table = new Image(Root.assets.getTexture("table"));
   	table.x = 800;
@@ -173,6 +197,14 @@ public var playerInventory = new List<String>();
     bed2.x = 150;
     bed2.y = 145;
     rootSprite.addChild(bed2);
+    
+    bedNoSheet = new Image(Root.assets.getTexture("bedNoSheet"));
+    bedNoSheet.x = 150;
+    bedNoSheet.y = 145;
+    
+    cutBedNoSheet = new Image(Root.assets.getTexture("cutBedNoSheet"));
+    cutBedNoSheet.x = 150;
+    cutBedNoSheet.y = 145;
       
     sleepingBed = new Image(Root.assets.getTexture("sleepingBed"));
     sleepingBed.x = 150;
@@ -181,6 +213,14 @@ public var playerInventory = new List<String>();
     sleepingCutBed = new Image(Root.assets.getTexture("sleepingCutBed"));
     sleepingCutBed.x = 150;
     sleepingCutBed.y = 145;
+    
+    sleepingBedNoSheet = new Image(Root.assets.getTexture("sleepingBedNoSheet"));
+    sleepingBedNoSheet.x = 150;
+    sleepingBedNoSheet.y = 145;
+      
+    sleepingCutBedNoSheet = new Image(Root.assets.getTexture("sleepingCutBedNoSheet"));
+    sleepingCutBedNoSheet.x = 150;
+    sleepingCutBedNoSheet.y = 145;
 
     spring = new Image(Root.assets.getTexture("spring"));
     spring.x = 335;
@@ -203,6 +243,10 @@ public var playerInventory = new List<String>();
     winShovel = new Image(Root.assets.getTexture("winShovel"));
 	  winShovel.x = 0;
 	  winShovel.y = 0;
+	  
+	  winSheet = new Image(Root.assets.getTexture("winSheet"));
+	  winSheet.x = 0;
+	  winSheet.y = 0;
 	
 	  gameOverGlass = new Image(Root.assets.getTexture("gameOverGlass"));
 	  gameOverGlass.x = 0;
@@ -211,6 +255,18 @@ public var playerInventory = new List<String>();
 	  gameOverGlassWSpring = new Image(Root.assets.getTexture("gameOverGlassWSpring"));
 	  gameOverGlassWSpring.x = 0;
 	  gameOverGlassWSpring.y = 0;
+	  
+	  gameOverGlassNoSheet = new Image(Root.assets.getTexture("gameOverGlassNoSheet"));
+	  gameOverGlassNoSheet.x = 0;
+	  gameOverGlassNoSheet.y = 0;
+
+	  gameOverGlassWSpringNoSheet = new Image(Root.assets.getTexture("gameOverGlassWSpringNoSheet"));
+	  gameOverGlassWSpringNoSheet.x = 0;
+	  gameOverGlassWSpringNoSheet.y = 0;
+	  
+	  gameOverWindow = new Image(Root.assets.getTexture("gameOverWindow"));
+	  gameOverWindow.x = 0;
+	  gameOverWindow.y = 0;
 
 		//Set Textfield to be used as a terminal
 		textField = new flash.text.TextField();
@@ -252,7 +308,7 @@ public var playerInventory = new List<String>();
     textOut.defaultTextFormat = textOutFormat;
     textOut.background = true;
     textOut.backgroundColor = 0xfdffef;
-    textOut.width = 400;
+    textOut.width = 480;
     textOut.x = 0;
     textOut.y = 0;
     Starling.current.nativeOverlay.addChild(textOut);
@@ -281,6 +337,7 @@ public var playerInventory = new List<String>();
   					textOut.text = "You try to open the door, but it seems to be locked.";
   			}
   				else{
+					Root.assets.playSound("doorOpen");
   					textOut.text = "The door opens, YOU WIN!!!";
   					// win the game, win screen here
                     textOut.text = "";
@@ -374,6 +431,7 @@ public var playerInventory = new List<String>();
   		if(textField.text == "Window" || textField.text == "window"){
   			textOut.text = "You see a window.";
   		}
+		
   		if(textField.text == "Open window" || textField.text == "open window" || textField.text == "open the window"){
   			if(userSitting == true){
   				textOut.text = "you cant, you are sitting still";
@@ -397,6 +455,8 @@ public var playerInventory = new List<String>();
   				}
   				else{
   					textOut.text = "You break the window with the chair.";
+					Root.assets.playSound("glassBreak");
+					windowOpen = true;
   					rootSprite.removeChild(window);
   					rootSprite.addChild(brokenWindow);
   					rootSprite.addChild(brokenGlass);
@@ -405,8 +465,31 @@ public var playerInventory = new List<String>();
   		}
 
   		if(textField.text == "Crawl out window" || textField.text == "crawl out window" || textField.text == "go out window" || textField.text == "escape through window"){
-  			textOut.text = "The window is shut, you cannot crawl out.";
+  			if(windowOpen == true){
+				if(holdingSheet == true){
+					removeChildren();
+					rootSprite.addChild(winSheet);
+					if (textField.text == "Play" || textField.text == "play"){
+						removeChildren();
+						removeEventListeners();
+						start();
+					}
+				}
+				else{
+					removeChildren();
+					Root.assets.playSound("bgmusic");
+					rootSprite.addChild(gameOverWindow);
+					if (textField.text == "Play" || textField.text == "play"){
+						removeChildren();
+						removeEventListeners();
+						start();
+					}
+				}
+			}
+			else{
+			textOut.text = "The window is shut, you cannot crawl out.";
   			}
+		}
 
 
   		//glass statements
@@ -455,9 +538,16 @@ public var playerInventory = new List<String>();
         		else{
         			if(holdingGlass == true){
             			textOut.text = "You cut open the bed with the broken glass.";
+				Root.assets.playSound("ripping");
             			rootSprite.removeChild(bed);
-            			rootSprite.addChild(cutBed);
+            			// check if sheet is on bed
+				if(removedSheet == true){
+					rootSprite.addChild(cutBedNoSheet);
+				}
+				else{
+				rootSprite.addChild(cutBed);
             			rootSprite.addChild(spring);
+				}
 				bedIsCut = true;
           			}
           			else{
@@ -599,6 +689,25 @@ public var playerInventory = new List<String>();
 
 
   			// bed statements
+			
+			if(textField.text == "pick up sheet" || textField.text == "pick up sheets" || textField.text == "take sheet" || textField.text == "take sheets" || textField.text == "remove sheet" || textField.text == "remove sheets"){
+				if(holdingSheet == false){
+					holdingSheet = true;
+					removedSheet = true;
+					playerInventory.add("Sheet");
+					rootSprite.addChild(miniSheet);
+					textOut.text = "you pick up the sheet.";
+					// check if bed is cut
+					if(bedIsCut == true){
+						rootSprite.removeChild(cutBed);
+						rootSprite.addChild(cutBedNoSheet);
+					}
+					else{
+						rootSprite.removeChild(bed2);
+						rootSprite.addChild(bedNoSheet);
+					}
+				}
+			}
   			
 			if(textField.text == "get in bed" || textField.text == "Get in bed" || textField.text == "lay down in bed" || textField.text == "Lay down in bed" || textField.text == "Lay down on bed" || textField.text == "lay down on bed" || textField.text == "go to bed" || textField.text == "Go to bed" || textField.text == "lay on bed" || textField.text == "lay in bed" || textField.text == "Lay in bed" || textField.text == "Lay on bed"){
 				// check to see if already laying down
@@ -610,8 +719,14 @@ public var playerInventory = new List<String>();
 					if(bedIsCut == true){
 						if(holdingGlass == true){
 							removeChildren();
+							Root.assets.playSound("bgmusic");
+							// check to see if the sheet is on bed
+							if(removedSheet == true){
+								rootSprite.addChild(gameOverGlassWSpringNoSheet);
+							}
+							else{
 							rootSprite.addChild(gameOverGlassWSpring);
-							
+							}
 							if (textField.text == "Play" || textField.text == "play"){
 								removeChildren();
 								removeEventListeners();
@@ -622,14 +737,27 @@ public var playerInventory = new List<String>();
 							textOut.text = "you laid down";
 							rootSprite.removeChild(avatar);
 							rootSprite.removeChild(bed2);
+							// check if sheet is on bed
+							if(removedSheet == true){
+								rootSprite.addChild(sleepingCutBedNoSheet);
+							}
+							else{
 							rootSprite.addChild(sleepingCutBed);
+							}
 							userSleeping = true;
 						}
 					}
 					else{
 						if(holdingGlass == true){
-							rootSprite.addChild(gameOverGlassWSpring);
-							
+							removeChildren();
+							// check if sheet on bed
+							Root.assets.playSound("bgmusic");
+							if(removedSheet == true){
+								rootSprite.addChild(gameOverGlassNoSheet);
+							}
+							else{
+							rootSprite.addChild(gameOverGlass);
+							}
 							if (textField.text == "Play" || textField.text == "play"){
 								removeChildren();
 								removeEventListeners();
@@ -640,7 +768,13 @@ public var playerInventory = new List<String>();
 							textOut.text = "you laid down";
 							rootSprite.removeChild(avatar);
 							rootSprite.removeChild(bed2);
+							// check if sheet on bed
+							if(removedSheet == true){
+								rootSprite.addChild(sleepingBedNoSheet);
+							}
+							else{
 							rootSprite.addChild(sleepingBed);
+							}
 							userSleeping = true;
 						}
 					}
@@ -658,12 +792,24 @@ public var playerInventory = new List<String>();
 					// check if the bed is cut or not
 					if(bedIsCut == true){
 						rootSprite.removeChild(sleepingCutBed);
+						// check if sheet on bed
+						if(removedSheet == true){
+							rootSprite.addChild(cutBedNoSheet);
+						}
+						else{
 						rootSprite.addChild(cutBed);
+						}
 						rootSprite.addChild(avatar);
 					}
 					else{
 						rootSprite.removeChild(sleepingBed);
+						// check if sheet on bed
+						if(removedSheet == true){
+							rootSprite.addChild(bedNoSheet);
+						}
+						else{
 						rootSprite.addChild(bed2);
+						}
 						rootSprite.addChild(avatar);
 					}
 				}

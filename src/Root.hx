@@ -58,10 +58,24 @@ class Root extends Sprite {
     assets.enqueue("assets/sleepingCutBed.png");
     assets.enqueue("assets/gameOverGlass.png");
     assets.enqueue("assets/gameOverGlassWSpring.png");
+    
+    assets.enqueue("assets/bedNoSheet.png");
+    assets.enqueue("assets/cutBedNoSheet.png");
+    assets.enqueue("assets/gameOverGlassNoSheet.png");
+    assets.enqueue("assets/gameOverGlassWSpringNoSheet.png");
+    assets.enqueue("assets/gameOverWindow.png");
+    assets.enqueue("assets/miniSheet.png");
+    assets.enqueue("assets/sleepingBedNoSheet.png");
+    assets.enqueue("assets/sleepingCutBedNoSheet.png");
+    assets.enqueue("assets/winSheet.png");
 
     assets.enqueue("assets/bgmusic.mp3");
+    assets.enqueue("assets/doorOpen.mp3");
+    assets.enqueue("assets/glassBreak.mp3");
+    assets.enqueue("assets/ripping.mp3");
     assets.enqueue("assets/atlas.xml");
     assets.enqueue("assets/assets.png");
+    
     
 
     assets.loadQueue(function onProgress(ratio:Float) {
